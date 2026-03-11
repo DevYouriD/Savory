@@ -18,10 +18,10 @@ import { RowsIcon, CaretUpDownIcon, CheckIcon } from "@phosphor-icons/react"
 export function VersionSwitcher({
   versions,
   defaultVersion,
-}: {
+}: Readonly<{
   versions: string[]
   defaultVersion: string
-}) {
+}>) {
   const [selectedVersion, setSelectedVersion] = React.useState(defaultVersion)
 
   return (

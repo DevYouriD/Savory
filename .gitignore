@@ -1,0 +1,70 @@
+/.idea/
+
+# Savory Backend
+/savory-backend/.idea/
+/savory-backend/cmake-build-*/
+/savory-backend/*.iws
+/savory-backend/out/
+/savory-backend/atlassian-ide-plugin.xml
+/savory-backend/com_crashlytics_export_strings.xml
+/savory-backend/crashlytics.properties
+/savory-backend/crashlytics-build.properties
+/savory-backend/fabric.properties
+/savory-backend/*.class
+/savory-backend/*.log
+/savory-backend/*.ctxt
+/savory-backend/.mtj.tmp/
+/savory-backend/*.jar
+/savory-backend/*.war
+/savory-backend/*.nar
+/savory-backend/*.ear
+/savory-backend/*.zip
+/savory-backend/*.tar.gz
+/savory-backend/*.rar
+/savory-backend/hs_err_pid*
+/savory-backend/replay_pid*
+
+# =====================================================================================================================#
+
+# Savory Frontend
+/savory-frontend/.idea/
+
+# dependencies
+/savory-frontend/node_modules
+/savory-frontend/.pnp
+/savory-frontend/.pnp.*
+/savory-frontend/.yarn/*
+/savory-frontend/!.yarn/patches
+/savory-frontend/!.yarn/plugins
+/savory-frontend/!.yarn/releases
+/savory-frontend/!.yarn/versions
+
+# testing
+/savory-frontend/coverage
+
+# next.js
+/savory-frontend/.next/
+/savory-frontend/out/
+
+# production
+/savory-frontend/build
+
+# misc
+/savory-frontend/.DS_Store
+/savory-frontend/*.pem
+
+# debug
+/savory-frontend/npm-debug.log*
+/savory-frontend/yarn-debug.log*
+/savory-frontend/yarn-error.log*
+/savory-frontend/.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+/savory-frontend/.env*
+
+# vercel
+/savory-frontend/.vercel
+
+# typescript
+/savory-frontend/*.tsbuildinfo
+/savory-frontend/next-env.d.ts
