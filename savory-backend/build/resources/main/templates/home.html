@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-sans">
+
+<!-- Header -->
+<header class="bg-white shadow">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-green-600">Delicious Recipes</h1>
+        <nav class="space-x-4">
+            <a href="#" class="text-gray-700 hover:text-green-600">Home</a>
+            <a href="#recipes" class="text-gray-700 hover:text-green-600">Recipes</a>
+            <a href="#about" class="text-gray-700 hover:text-green-600">About</a>
+            <a href="#contact" class="text-gray-700 hover:text-green-600">Contact</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="bg-green-100 py-16">
+    <div class="container mx-auto px-6 text-center">
+        <h2 class="text-4xl font-bold mb-4 text-green-800">Discover Delicious Recipes</h2>
+        <p class="text-gray-700 mb-6">Explore tasty dishes, from easy weeknight meals to gourmet creations.</p>
+        <a href="#recipes" class="inline-block bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 transition">Explore Recipes</a>
+    </div>
+</section>
+
+<!-- Recipes Section -->
+<section id="recipes" class="py-16">
+    <div class="container mx-auto px-6">
+        <h3 class="text-3xl font-bold mb-8 text-center text-gray-800">Popular Recipes</h3>
+        <div class="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+
+            <!-- Recipe Card -->
+            <div class="bg-white rounded shadow hover:shadow-lg transition overflow-hidden">
+                <img src="https://source.unsplash.com/400x300/?pasta" alt="Pasta Recipe" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h4 class="font-bold text-xl mb-2">Creamy Pasta</h4>
+                    <p class="text-gray-700 mb-4">A simple and creamy pasta recipe perfect for dinner nights.</p>
+                    <a href="#" class="text-green-600 font-semibold hover:underline">View Recipe →</a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded shadow hover:shadow-lg transition overflow-hidden">
+                <img src="https://source.unsplash.com/400x300/?salad" alt="Salad Recipe" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h4 class="font-bold text-xl mb-2">Fresh Salad</h4>
+                    <p class="text-gray-700 mb-4">A healthy and refreshing salad with seasonal vegetables.</p>
+                    <a href="#" class="text-green-600 font-semibold hover:underline">View Recipe →</a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded shadow hover:shadow-lg transition overflow-hidden">
+                <img src="https://source.unsplash.com/400x300/?dessert" alt="Dessert Recipe" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h4 class="font-bold text-xl mb-2">Chocolate Dessert</h4>
+                    <p class="text-gray-700 mb-4">Indulge in this rich chocolate dessert that everyone will love.</p>
+                    <a href="#" class="text-green-600 font-semibold hover:underline">View Recipe →</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="bg-gray-100 py-16">
+    <div class="container mx-auto px-6 text-center">
+        <h3 class="text-3xl font-bold mb-4 text-gray-800">About Us</h3>
+        <p class="text-gray-700 max-w-2xl mx-auto">Delicious Recipes is a place where food lovers can find easy-to-follow recipes, cooking tips, and inspiration to create meals that delight the senses.</p>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-16">
+    <div class="container mx-auto px-6 text-center">
+        <h3 class="text-3xl font-bold mb-4 text-gray-800">Get in Touch</h3>
+        <p class="text-gray-700 mb-6">Have questions or suggestions? Send us a message!</p>
+        <form class="max-w-xl mx-auto space-y-4">
+            <input type="text" placeholder="Name" class="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500">
+            <input type="email" placeholder="Email" class="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500">
+            <textarea placeholder="Message" class="w-full p-3 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"></textarea>
+            <button type="submit" class="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700 transition">Send Message</button>
+        </form>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-white shadow py-6">
+    <div class="container mx-auto px-6 text-center text-gray-700">
+        &copy; 2026 DevYouriD. All rights reserved.
+    </div>
+</footer>
+
+</body>
+</html>

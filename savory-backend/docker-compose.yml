@@ -1,0 +1,17 @@
+services:
+  db:
+    image: mysql:latest
+    container_name: savory-db
+    restart: unless-stopped
+    volumes:
+      - database:/var/lib/mysql
+    ports:
+      - "3306:3306" # SET TO AVAILABLE PORT (DEFAULT IS 3306:3306)
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: savorydb
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: root
+
+volumes:
+  database:
