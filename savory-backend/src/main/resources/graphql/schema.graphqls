@@ -1,0 +1,131 @@
+# =====================
+# Types
+# =====================
+
+type Recipe {
+  id: ID!
+  title: String!
+  description: String
+  instructions: String!
+  imageUrl: String
+  preparationTime: Int
+  cookingTime: Int
+  servings: Int
+  ingredients: [RecipeIngredient!]!
+  categories: [Category!]!
+  tags: [Tag!]!
+  author: User
+  comments: [Comment!]!
+  ratings: [Rating!]!
+  averageRating: Float
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Ingredient {
+  id: ID!
+  name: String!
+  unit: String
+}
+
+type RecipeIngredient {
+  ingredient: Ingredient!
+  quantity: String!
+}
+
+type Tag {
+  id: ID!
+  name: String!
+}
+
+type Category {
+  id: ID!
+  name: String!
+  recipes: [Recipe!]!
+}
+
+type Comment {
+  id: ID!
+  author: User!
+  content: String!
+  createdAt: String!
+}
+
+type Rating {
+  id: ID!
+  user: User!
+  score: Int!
+}
+
+# =====================
+# Queries
+# =====================
+
+type Query {
+  # Fetch all recipes
+  recipes(limit: Int, offset: Int): [Recipe!]!
+
+  # Fetch single recipe
+  recipe(id: ID!): Recipe
+
+  # Fetch recipes by category
+  recipesByCategory(categoryId: ID!): [Recipe!]!
+
+  # Fetch recipes by tag
+  recipesByTag(tagId: ID!): [Recipe!]!
+
+  # Fetch ingredients
+  ingredients: [Ingredient!]!
+
+  # Fetch categories
+  categories: [Category!]!
+
+  # Fetch tags
+  tags: [Tag!]!
+}
+
+# =====================
+# Mutations
+# =====================
+
+type Mutation {
+  # Recipe mutations
+  createRecipe(
+    title: String!
+    description: String
+    instructions: String!
+    imageUrl: String
+    preparationTime: Int
+    cookingTime: Int
+    servings: Int
+    ingredientQuantities: [IngredientQuantityInput!]!
+    categoryIds: [ID!]!
+    tagIds: [ID!]
+    authorId: ID
+  ): Recipe!
+
+  updateRecipe(
+    id: ID!
+    title: String
+    description: String
+    instructions: String
+    imageUrl: String
+    preparationTime: Int
+    cookingTime: Int
+    servings: Int
+    ingredientQuantities: [IngredientQuantityInput!]
+    categoryIds: [ID!]
+    tagIds: [ID!]
+  ): Recipe!
+
+  deleteRecipe(id: ID!): Boolean!
+}
+
+# =====================
+# Input Types
+# =====================
+
+input IngredientQuantityInput {
+  ingredientId: ID!
+  quantity: String!
+}

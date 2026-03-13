@@ -5,7 +5,6 @@
 
 // Dependency versions
 val lombokVersion = "1.18.42"
-val springdocOpenapiStarterWebmvcUiVersion = "3.0.2"
 val mysqlConnectorJavaVersion = "8.0.33"
 val plantUmlVersion = "8059"
 
@@ -42,10 +41,9 @@ dependencies {
 
     // UTILITY
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-graphql")
     compileOnly("org.projectlombok:lombok:$lombokVersion")
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")
-    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${springdocOpenapiStarterWebmvcUiVersion}")
 
     // SECURITY
     implementation("org.springframework.boot:spring-boot-starter-security")
@@ -55,6 +53,7 @@ dependencies {
     implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
 
     // DATA STORAGE
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("mysql:mysql-connector-java:${mysqlConnectorJavaVersion}")
 
     // DOCUMENTATION

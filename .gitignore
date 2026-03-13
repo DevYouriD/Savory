@@ -1,5 +1,7 @@
 /.idea/
 
+.idea
+
 # Savory Backend
 /savory-backend/.idea/
 /savory-backend/cmake-build-*/
@@ -23,6 +25,8 @@
 /savory-backend/*.rar
 /savory-backend/hs_err_pid*
 /savory-backend/replay_pid*
+/savory-backend/.gradle
+/savory-backend/build/*
 
 # =====================================================================================================================#
 
@@ -68,3 +72,4 @@
 # typescript
 /savory-frontend/*.tsbuildinfo
 /savory-frontend/next-env.d.ts
+/savory-backend/.gradle/
