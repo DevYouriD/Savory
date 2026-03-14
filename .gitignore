@@ -72,4 +72,3 @@
 # typescript
 /savory-frontend/*.tsbuildinfo
 /savory-frontend/next-env.d.ts
-/savory-backend/.gradle/
