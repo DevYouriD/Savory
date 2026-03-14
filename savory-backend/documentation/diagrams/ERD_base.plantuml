@@ -1,0 +1,45 @@
+@startuml
+entity Recipe {
+  +Long id
+  +String title
+  +String description
+  +String instructions
+  +String imageUrl
+  +int preparationTime
+  +int cookingTime
+  +int servings
+  +LocalDateTime createdAt
+  +LocalDateTime updatedAt
+}
+
+entity RecipeIngredient {
+  'Recipe Ingredient ID is an @Embeddable class'
+  +RecipeIngredientId id
+  +Recipe recipe
+  +Ingredient ingredient
+  +Float quantity
+}
+
+entity Ingredient {
+  +Long id
+  +String name
+  +String unit
+}
+
+entity Category {
+  +Long id
+  +String name
+}
+
+entity Tag {
+  +Long id
+  +String name
+}
+
+RecipeIngredient }|--|| Recipe : belongs to
+RecipeIngredient }|--|| Ingredient : contains
+
+Recipe }|--|| Category : categorized as
+Recipe }|--|| Tag : tagged with
+
+@enduml

@@ -41,7 +41,7 @@ dependencies {
 
     // UTILITY
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-graphql")
+    // implementation("org.springframework.boot:spring-boot-starter-graphql")
     compileOnly("org.projectlombok:lombok:$lombokVersion")
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")
 

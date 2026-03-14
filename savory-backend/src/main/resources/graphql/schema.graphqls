@@ -5,127 +5,73 @@
 type Recipe {
   id: ID!
   title: String!
-  description: String
+  description: String!
   instructions: String!
-  imageUrl: String
-  preparationTime: Int
-  cookingTime: Int
-  servings: Int
-  ingredients: [RecipeIngredient!]!
-  categories: [Category!]!
-  tags: [Tag!]!
-  author: User
-  comments: [Comment!]!
-  ratings: [Rating!]!
-  averageRating: Float
-  createdAt: String!
-  updatedAt: String!
+  imageUrl: String!
+  preparationTime: Int!
+  cookingTime: Int!
+  servings: Int!
+  createdAt: Int!
+  updatedAt: Int!
 }
 
-type Ingredient {
+type ExpansionSet {
   id: ID!
   name: String!
-  unit: String
+  icon: String
+  cards: [Card!]!
 }
 
-type RecipeIngredient {
-  ingredient: Ingredient!
-  quantity: String!
-}
-
-type Tag {
+type Series {
   id: ID!
   name: String!
-}
-
-type Category {
-  id: ID!
-  name: String!
-  recipes: [Recipe!]!
-}
-
-type Comment {
-  id: ID!
-  author: User!
-  content: String!
-  createdAt: String!
-}
-
-type Rating {
-  id: ID!
-  user: User!
-  score: Int!
+  icon: String
+  expansionSets: [ExpansionSet!]!
 }
 
 # =====================
-# Queries
+# Types
 # =====================
 
 type Query {
-  # Fetch all recipes
-  recipes(limit: Int, offset: Int): [Recipe!]!
+  findSeriesById(id: ID): Series
+  findAllSeries: [Series]!
 
-  # Fetch single recipe
-  recipe(id: ID!): Recipe
+  findExpansionSetById(id: ID): ExpansionSet
+  findAllExpansionSets: [ExpansionSet]!
 
-  # Fetch recipes by category
-  recipesByCategory(categoryId: ID!): [Recipe!]!
-
-  # Fetch recipes by tag
-  recipesByTag(tagId: ID!): [Recipe!]!
-
-  # Fetch ingredients
-  ingredients: [Ingredient!]!
-
-  # Fetch categories
-  categories: [Category!]!
-
-  # Fetch tags
-  tags: [Tag!]!
+  findCardById(id: ID): Card
+  findAllCards: [Card]!
 }
 
-# =====================
-# Mutations
-# =====================
+input CardInput {
+  face: String!
+  name: String!
+  number: String!
+  collected: Boolean
+  price: Float!
+}
+
+input ExpansionSetInput {
+  name: String!
+  icon: String
+}
+
+input SeriesInput {
+  name: String!
+  icon: String
+}
 
 type Mutation {
-  # Recipe mutations
-  createRecipe(
-    title: String!
-    description: String
-    instructions: String!
-    imageUrl: String
-    preparationTime: Int
-    cookingTime: Int
-    servings: Int
-    ingredientQuantities: [IngredientQuantityInput!]!
-    categoryIds: [ID!]!
-    tagIds: [ID!]
-    authorId: ID
-  ): Recipe!
+  createSeries(input: SeriesInput!): Series!
+  updateSeries(id: ID!, name: String!, icon: String): Series!
+  deleteSeries(id: ID!): String!
 
-  updateRecipe(
-    id: ID!
-    title: String
-    description: String
-    instructions: String
-    imageUrl: String
-    preparationTime: Int
-    cookingTime: Int
-    servings: Int
-    ingredientQuantities: [IngredientQuantityInput!]
-    categoryIds: [ID!]
-    tagIds: [ID!]
-  ): Recipe!
+  addExpansionSetToSeries(seriesId: ID!, input: ExpansionSetInput!): ExpansionSet!
+  updateExpansionSet(seriesId: ID!, expansionSetId: ID!, name: String!, icon: String): ExpansionSet!
+  deleteExpansionSet(seriesId: ID!, expansionSetId: ID!): String!
 
-  deleteRecipe(id: ID!): Boolean!
-}
-
-# =====================
-# Input Types
-# =====================
-
-input IngredientQuantityInput {
-  ingredientId: ID!
-  quantity: String!
+  addCardToExpansionSet(seriesId: ID!, expansionSetId: ID!, input: CardInput!): Card!
+  updateCard(seriesId: ID!, expansionSetId: ID!, cardId: ID!, name: String, number: String, collected: Boolean, price: Float): Card!
+  deleteCard(seriesId: ID!, expansionSetId: ID!, cardId: ID!): String!
 }

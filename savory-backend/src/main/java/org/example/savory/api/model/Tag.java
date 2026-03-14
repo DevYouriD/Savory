@@ -8,14 +8,14 @@ import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
-@Getter @Setter
-class Tag {
-
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  Long id;
-  String name;
-  List<Recipe> recipes;
-
-}
+//@Entity
+//@Getter @Setter
+//class Tag {
+//
+//  @Id
+//  @GeneratedValue(strategy = GenerationType.IDENTITY)
+//  Long id;
+//  String name;
+//  List<Recipe> recipes;
+//
+//}
