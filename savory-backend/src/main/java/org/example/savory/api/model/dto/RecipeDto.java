@@ -2,6 +2,7 @@ package org.example.savory.api.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.example.savory.api.model.entity.Ingredient;
 
 import java.util.List;
 
@@ -16,5 +17,5 @@ public class RecipeDto {
     private int servings;
     private String createdAt;
     private String updatedAt;
-    private List<IngredientForRecipeDto> ingredients;
+    private List<Ingredient> ingredients;
 }

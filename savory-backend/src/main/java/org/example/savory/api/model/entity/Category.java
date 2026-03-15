@@ -1,6 +1,5 @@
 package org.example.savory.api.model.entity;
 
-//@Entity
 //@Getter @Setter
 //class Category {
 //

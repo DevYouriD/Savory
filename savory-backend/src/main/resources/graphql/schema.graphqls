@@ -3,7 +3,7 @@
 # =====================
 
 type Recipe {
-  id: ID
+  id: ID!
   title: String!
   description: String!
   instructions: String!
@@ -13,24 +13,13 @@ type Recipe {
   servings: Int!
   createdAt: String!
   updatedAt: String
-  recipeIngredients: [RecipeIngredient!]
+  ingredients: [Ingredient!]
 }
 
 type Ingredient {
   id: ID!
   name: String!
   unit: String!
-}
-
-type RecipeIngredientId {
-  recipeId: ID!
-  ingredientId: ID!
-}
-
-type RecipeIngredient {
-  id: RecipeIngredientId!
-  recipe: Recipe!
-  ingredient: Ingredient!
   quantity: Float!
 }
 
@@ -39,14 +28,8 @@ type RecipeIngredient {
 # =====================
 
 type Query {
-  findRecipeById(id: ID): Recipe
-  findAllRecipes: [Recipe]!
-
-  findIngredientById(id: ID): Ingredient
-  findAllIngredients: [Ingredient]!
-
-  findRecipeIngredientById(id: ID): RecipeIngredient
-  findAllRecipeIngredients: [RecipeIngredient]!
+  findRecipeById(id: ID!): Recipe
+  findAllRecipes: [Recipe!]!
 }
 
 # =====================
@@ -61,19 +44,13 @@ input RecipeInput {
   preparationTime: Int!
   cookingTime: Int!
   servings: Int!
-  createdAt: String!
-  updatedAt: String
-  ingredients: [IngredientForRecipeInput!]
-}
-
-input IngredientForRecipeInput {
-  ingredientId: ID!
-  quantity: Float!
+  ingredients: [IngredientInput!]
 }
 
 input IngredientInput {
   name: String!
   unit: String!
+  quantity: Float!
 }
 
 # =====================
@@ -81,15 +58,7 @@ input IngredientInput {
 # =====================
 
 type Mutation {
-  # Recipe mutations
   createRecipe(input: RecipeInput!): Recipe!
-  updateRecipe(id: ID!, title: String, description: String, instructions: String, imageUrl: String, preparationTime: Int, cookingTime: Int, servings: Int): Recipe!
+  updateRecipe(id: ID!, input: RecipeInput!): Recipe!
   deleteRecipe(id: ID!): String!
-  addIngredientToRecipe(recipeId: ID!, ingredientId: ID!, quantity: Float!): RecipeIngredient!
-  removeIngredientFromRecipe(recipeId: ID!, ingredientId: ID!): String!
-
-  # Ingredient mutations
-  createIngredient(input: IngredientInput!): Ingredient!
-  updateIngredient(id: ID!, name: String, unit: String): Ingredient!
-  deleteIngredient(id: ID!): String!
 }

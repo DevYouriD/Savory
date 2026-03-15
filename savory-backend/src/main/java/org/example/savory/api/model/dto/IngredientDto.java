@@ -7,4 +7,5 @@ import lombok.Setter;
 public class IngredientDto {
     private String name;
     private String unit;
+    private Float quantity;
 }
