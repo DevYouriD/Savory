@@ -2,7 +2,7 @@ package org.example.savory.api.service;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.example.savory.api.model.User;
+import org.example.savory.api.model.entity.User;
 import org.example.savory.api.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

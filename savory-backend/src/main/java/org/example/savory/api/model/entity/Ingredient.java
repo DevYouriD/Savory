@@ -1,4 +1,4 @@
-package org.example.savory.api.model;
+package org.example.savory.api.model.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -18,7 +18,7 @@ import java.util.Set;
 @Table(name = "ingredients")
 @Getter @Setter
 @NoArgsConstructor
-class Ingredient {
+public class Ingredient {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

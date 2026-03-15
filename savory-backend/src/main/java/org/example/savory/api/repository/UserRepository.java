@@ -1,6 +1,6 @@
 package org.example.savory.api.repository;
 
-import org.example.savory.api.model.User;
+import org.example.savory.api.model.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

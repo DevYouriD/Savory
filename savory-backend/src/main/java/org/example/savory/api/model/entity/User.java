@@ -1,4 +1,4 @@
-package org.example.savory.api.model;
+package org.example.savory.api.model.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,7 +8,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-import static org.example.savory.api.model.Role.USER;
+import static org.example.savory.api.model.entity.Role.USER;
 
 @Entity
 @Getter

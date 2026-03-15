@@ -1,4 +1,4 @@
-package org.example.savory.api.model;
+package org.example.savory.api.model.entity;
 
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

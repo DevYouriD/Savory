@@ -3,7 +3,7 @@
 # =====================
 
 type Recipe {
-  id: ID!
+  id: ID
   title: String!
   description: String!
   instructions: String!
@@ -11,67 +11,85 @@ type Recipe {
   preparationTime: Int!
   cookingTime: Int!
   servings: Int!
-  createdAt: Int!
-  updatedAt: Int!
+  createdAt: String!
+  updatedAt: String
+  recipeIngredients: [RecipeIngredient!]
 }
 
-type ExpansionSet {
+type Ingredient {
   id: ID!
   name: String!
-  icon: String
-  cards: [Card!]!
+  unit: String!
 }
 
-type Series {
-  id: ID!
-  name: String!
-  icon: String
-  expansionSets: [ExpansionSet!]!
+type RecipeIngredientId {
+  recipeId: ID!
+  ingredientId: ID!
+}
+
+type RecipeIngredient {
+  id: RecipeIngredientId!
+  recipe: Recipe!
+  ingredient: Ingredient!
+  quantity: Float!
 }
 
 # =====================
-# Types
+# Queries
 # =====================
 
 type Query {
-  findSeriesById(id: ID): Series
-  findAllSeries: [Series]!
+  findRecipeById(id: ID): Recipe
+  findAllRecipes: [Recipe]!
 
-  findExpansionSetById(id: ID): ExpansionSet
-  findAllExpansionSets: [ExpansionSet]!
+  findIngredientById(id: ID): Ingredient
+  findAllIngredients: [Ingredient]!
 
-  findCardById(id: ID): Card
-  findAllCards: [Card]!
+  findRecipeIngredientById(id: ID): RecipeIngredient
+  findAllRecipeIngredients: [RecipeIngredient]!
 }
 
-input CardInput {
-  face: String!
+# =====================
+# Inputs
+# =====================
+
+input RecipeInput {
+  title: String!
+  description: String!
+  instructions: String!
+  imageUrl: String!
+  preparationTime: Int!
+  cookingTime: Int!
+  servings: Int!
+  createdAt: String!
+  updatedAt: String
+  ingredients: [IngredientForRecipeInput!]
+}
+
+input IngredientForRecipeInput {
+  ingredientId: ID!
+  quantity: Float!
+}
+
+input IngredientInput {
   name: String!
-  number: String!
-  collected: Boolean
-  price: Float!
+  unit: String!
 }
 
-input ExpansionSetInput {
-  name: String!
-  icon: String
-}
-
-input SeriesInput {
-  name: String!
-  icon: String
-}
+# =====================
+# Mutations
+# =====================
 
 type Mutation {
-  createSeries(input: SeriesInput!): Series!
-  updateSeries(id: ID!, name: String!, icon: String): Series!
-  deleteSeries(id: ID!): String!
+  # Recipe mutations
+  createRecipe(input: RecipeInput!): Recipe!
+  updateRecipe(id: ID!, title: String, description: String, instructions: String, imageUrl: String, preparationTime: Int, cookingTime: Int, servings: Int): Recipe!
+  deleteRecipe(id: ID!): String!
+  addIngredientToRecipe(recipeId: ID!, ingredientId: ID!, quantity: Float!): RecipeIngredient!
+  removeIngredientFromRecipe(recipeId: ID!, ingredientId: ID!): String!
 
-  addExpansionSetToSeries(seriesId: ID!, input: ExpansionSetInput!): ExpansionSet!
-  updateExpansionSet(seriesId: ID!, expansionSetId: ID!, name: String!, icon: String): ExpansionSet!
-  deleteExpansionSet(seriesId: ID!, expansionSetId: ID!): String!
-
-  addCardToExpansionSet(seriesId: ID!, expansionSetId: ID!, input: CardInput!): Card!
-  updateCard(seriesId: ID!, expansionSetId: ID!, cardId: ID!, name: String, number: String, collected: Boolean, price: Float): Card!
-  deleteCard(seriesId: ID!, expansionSetId: ID!, cardId: ID!): String!
+  # Ingredient mutations
+  createIngredient(input: IngredientInput!): Ingredient!
+  updateIngredient(id: ID!, name: String, unit: String): Ingredient!
+  deleteIngredient(id: ID!): String!
 }

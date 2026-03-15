@@ -1,7 +1,7 @@
 package org.example.savory.api.service;
 
 import lombok.AllArgsConstructor;
-import org.example.savory.api.model.User;
+import org.example.savory.api.model.entity.User;
 import org.example.savory.api.repository.UserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

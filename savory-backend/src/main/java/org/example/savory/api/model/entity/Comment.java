@@ -1,8 +1,4 @@
-package org.example.savory.api.model;
-
-import java.time.LocalDateTime;
-import lombok.Getter;
-import lombok.Setter;
+package org.example.savory.api.model.entity;
 
 //@Getter @Setter
 //class Comment {

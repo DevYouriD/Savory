@@ -1,4 +1,4 @@
-package org.example.savory.api.model;
+package org.example.savory.api.model.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -12,7 +12,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,7 +20,7 @@ import java.util.Set;
 @Getter @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-class Recipe {
+public class Recipe {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,13 +37,21 @@ class Recipe {
   // User author;
   // List<Comment> comments;
   // double rating;
-  LocalDateTime createdAt;
-  LocalDateTime updatedAt;
+  String createdAt;
+  String updatedAt;
 
   @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
   private Set<RecipeIngredient> recipeIngredients = new HashSet<>();
 
   public void addIngredient(Ingredient ingredient, float quantity) {
+
+    for (RecipeIngredient ri : recipeIngredients) {
+      if (ri.getIngredient().getId().equals(ingredient.getId())) {
+        ri.setQuantity(quantity);
+        return;
+      }
+    }
+
     RecipeIngredient recipeIngredient = new RecipeIngredient(this, ingredient, quantity);
     recipeIngredients.add(recipeIngredient);
     ingredient.getRecipeIngredients().add(recipeIngredient);

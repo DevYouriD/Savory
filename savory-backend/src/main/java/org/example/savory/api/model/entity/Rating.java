@@ -1,7 +1,4 @@
-package org.example.savory.api.model;
-
-import lombok.Getter;
-import lombok.Setter;
+package org.example.savory.api.model.entity;
 
 //@Getter @Setter
 //class Rating {
