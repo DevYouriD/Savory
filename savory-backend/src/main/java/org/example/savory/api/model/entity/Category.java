@@ -7,6 +7,5 @@ package org.example.savory.api.model.entity;
 //  @GeneratedValue(strategy = GenerationType.IDENTITY)
 //  Long id;
 //  String name;
-//  List<Recipe> recipes;
 //
 //}
