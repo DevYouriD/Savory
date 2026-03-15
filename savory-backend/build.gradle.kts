@@ -46,7 +46,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:$lombokVersion")
 
     // SECURITY
-    implementation("org.springframework.boot:spring-boot-starter-security")
+//    implementation("org.springframework.boot:spring-boot-starter-security")
 
     // FRONTEND
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
@@ -55,7 +55,7 @@ dependencies {
     // DATA STORAGE
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("mysql:mysql-connector-java:${mysqlConnectorJavaVersion}")
+//    implementation("mysql:mysql-connector-java:${mysqlConnectorJavaVersion}")
 
     // DOCUMENTATION
     implementation("net.sourceforge.plantuml:plantuml:${plantUmlVersion}")
