@@ -1,5 +1,3 @@
-import {ModeToggle} from "@/components/ui/mode-toggle";
-
 export default function Home() {
     return (
         <div className="bg-gray-900 py-6 sm:py-8 flex-1 flex flex-col">
@@ -7,8 +5,8 @@ export default function Home() {
 
                 {/* Title + Subtitle */}
                 <div className="mx-auto max-w-2xl lg:mx-0">
-                    <h2 className="text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
-                        Good Food Good Mood Blog
+                    <h2 className="font-serif text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
+                        Good Food, Good Mood
                     </h2>
                     <p className="mt-1 text-lg/8 text-gray-300">
                         Discover our new recipes here
