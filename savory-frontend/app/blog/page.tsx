@@ -1,18 +1,20 @@
 export default function Blog() {
     return (
-        <div className="bg-gray-900 py-24 sm:py-32">
+        <div className="bg-gray-900 py-6 sm:py-8 flex-1 flex flex-col">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
 
+                {/* Title + Subtitle */}
                 <div className="mx-auto max-w-2xl lg:mx-0">
                     <h2 className="text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
                         Good Food Good Mood Blog
                     </h2>
-                    <p className="mt-2 text-lg/8 text-gray-300">
+                    <p className="mt-1 text-lg/8 text-gray-300">
                         Discover our new recipes here
                     </p>
                 </div>
 
-                <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-700 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+                {/* Blog grid */}
+                <div className="mx-auto mt-6 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-12 border-t border-gray-700 pt-6 sm:mt-10 sm:pt-10 lg:mx-0 lg:max-w-none lg:grid-cols-3">
 
                     {/* Article 1 */}
                     <article className="flex max-w-xl flex-col">
@@ -48,7 +50,7 @@ export default function Blog() {
                             <img
                                 src="https://yousaypotatoes.com/wp-content/uploads/2024/08/seafood-chowder-3sq.jpg"
                                 alt="Fish Chowder"
-                                className="w-full h-[240px] object-cover transition-transform duration-300 group-hover:scale-110"
+                                className="w-full h-60 object-cover transition-transform duration-300 group-hover:scale-110"
                             />
                         </div>
                         <div className="bg-gray-800 p-5 rounded-b-xl w-full">
@@ -75,7 +77,7 @@ export default function Blog() {
                             <img
                                 src="https://cdn.jwplayer.com/v2/media/W4yH8741/thumbnails/8Mhboqg7.jpg?width=1280"
                                 alt="Chocolate Cake"
-                                className="w-full h-[240px] object-cover transition-transform duration-300 group-hover:scale-110"
+                                className="w-full h-60 object-cover transition-transform duration-300 group-hover:scale-110"
                             />
                         </div>
                         <div className="bg-gray-800 p-5 rounded-b-xl w-full">

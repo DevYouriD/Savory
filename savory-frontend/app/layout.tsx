@@ -27,12 +27,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
     return (
         <html lang="en" className={cn("font-mono", jetbrainsMono.variable)}>
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex`}>
         {mounted && (
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
                 <SidebarProvider>
                     <AppSidebar />
-                    <main>
+                    <main className="flex-1 flex flex-col bg-gray-900">
                         <SidebarTrigger />
                         {children}
                     </main>
