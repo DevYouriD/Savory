@@ -17,6 +17,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar"
 import {CaretRightIcon} from "@phosphor-icons/react"
+import {ModeToggle} from "@/components/ui/mode-toggle";
 
 // This is sample data.
 const data = {
@@ -103,7 +104,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <Collapsible
             key={item.title}
             title={item.title}
-            defaultOpen
+            // defaultOpen
             className="group/collapsible"
           >
             <SidebarGroup>
@@ -132,6 +133,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarGroup>
           </Collapsible>
         ))}
+        <div className="mt-auto px-4 py-4">
+          <ModeToggle />
+        </div>
       </SidebarContent>
       <SidebarRail />
     </Sidebar>

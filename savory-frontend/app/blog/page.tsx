@@ -6,7 +6,7 @@ export default function Blog() {
                 {/* Title + Subtitle */}
                 <div className="mx-auto max-w-2xl lg:mx-0">
                     <h2 className="text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">
-                        Good Food Good Mood Blog
+                        Good Food, Good Mood Blog
                     </h2>
                     <p className="mt-1 text-lg/8 text-gray-300">
                         Discover our new recipes here
