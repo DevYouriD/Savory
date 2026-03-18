@@ -3,6 +3,15 @@
 
 ---
 
+## ToDo
+- Rewrite homepage into template for actual data
+- Connect frontend to backend and fix CRUD
+- Create recipe detail page for every recipe where all data is visible
+- Create index page for easy access to every recipe (Recipe name is link) sorted by created date
+- 
+
+---
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started

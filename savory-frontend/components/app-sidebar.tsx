@@ -19,75 +19,43 @@ import {
 import {CaretRightIcon} from "@phosphor-icons/react"
 import {ModeToggle} from "@/components/ui/mode-toggle";
 
-// This is sample data.
 const data = {
   navMain: [
     {
       title: "Aperitif",
       url: "#",
-      items: [
-        {
-          title: "Limoncello",
-          url: "#",
-        },
-        {
-          title: "Ouzo",
-          url: "#",
-        },
-        {
-          title: "Cognac",
-          url: "#",
-          isActive: false,
-        },
-      ],
+      items: [],
     },
     {
       title: "Appetizers",
       url: "#",
-      items: [
-        {
-          title: "Cold appetizers",
-          url: "#",
-        },
-        {
-          title: "Warm appetizers",
-          url: "#",
-        },
-      ],
+      items: [],
     },
     {
       title: "Main Courses",
       url: "#",
-      items: [
-        {
-          title: "Grilled Chicken",
-          url: "#",
-        },
-      ],
+      items: [],
     },
     {
       title: "Deserts",
       url: "#",
       items: [
         {
-          title: "Chocolate Cake",
-          url: "#",
-        },
-        {
           title: "Tiramisu",
           url: "#",
+          // isActive: true,
+        },
+        {
+          title: "Chocolate Mousse",
+          url: "#",
+          // isActive: true,
         },
       ],
     },
     {
       title: "Cocktails",
       url: "#",
-      items: [
-        {
-          title: "Mojito",
-          url: "#",
-        },
-      ],
+      items: [],
     },
   ],
 }
