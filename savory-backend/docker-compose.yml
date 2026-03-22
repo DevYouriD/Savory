@@ -1,17 +1,17 @@
 services:
-  mongodb:
-    image: mongo:8
-    container_name: savory-mongodb
-    restart: unless-stopped
-    ports:
-      - "27017:27017"
+#  mongodb:
+#    image: mongo:8
+#    container_name: savory-mongodb
+#    restart: unless-stopped
+#    ports:
+#      - "27017:27017"
 #    environment:
 #      MONGO_INITDB_ROOT_USERNAME: admin
 #      MONGO_INITDB_ROOT_PASSWORD: root
-    networks:
-      - savory-net
-    volumes:
-      - savorydb-data:/data/db
+#    networks:
+#      - savory-net
+#    volumes:
+#      - savorydb-data:/data/db
 
 #  mysqldb:
 #    image: mysql:latest
@@ -29,26 +29,38 @@ services:
 #    volumes:
 #      - savory-auth-data:/var/lib/mysql
 
-  mongo-express:
-    image: mongo-express:latest
-    container_name: savory-mongo-ui
-    depends_on:
-      - mongodb
-    restart: unless-stopped
-    ports:
-      - "8081:8081"
-    environment:
-      ME_CONFIG_MONGODB_SERVER: mongodb
+#  mongo-express:
+#    image: mongo-express:latest
+#    container_name: savory-mongo-ui
+#    depends_on:
+#      - mongodb
+#    restart: unless-stopped
+#    ports:
+#      - "8081:8081"
+#    environment:
+#      ME_CONFIG_MONGODB_SERVER: mongodb
 #      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
 #      ME_CONFIG_MONGODB_ADMINPASSWORD: root
-      ME_CONFIG_BASICAUTH_ENABLED: true
-      ME_CONFIG_BASICAUTH_USERNAME: admin
-      ME_CONFIG_BASICAUTH_PASSWORD: root
+#      ME_CONFIG_BASICAUTH_ENABLED: true
+#      ME_CONFIG_BASICAUTH_USERNAME: admin
+#      ME_CONFIG_BASICAUTH_PASSWORD: root
+#    networks:
+#      - savory-net
+
+  savory-backend:
+    image: devyourid/savory-backend:latest
+    container_name: savory-backend
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
     networks:
       - savory-net
+    # depends_on:
+    #   - mongodb
+    #   - mysqldb
 
-volumes:
-  savorydb-data:
+#volumes:
+#  savorydb-data:
 #  savory-auth-data:
 
 networks:
