@@ -8,7 +8,7 @@
 - Connect frontend to backend and fix CRUD
 - Create recipe detail page for every recipe where all data is visible
 - Create index page for easy access to every recipe (Recipe name is link) sorted by created date
-- 
+- Change theme-colors
 
 ---
 
