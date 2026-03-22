@@ -33,7 +33,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Build backend
+      - name: Make Gradle wrapper executable
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
         run: ./gradlew clean build --no-daemon -x test
 
       # ----- DOCKER STEPS ----- #
