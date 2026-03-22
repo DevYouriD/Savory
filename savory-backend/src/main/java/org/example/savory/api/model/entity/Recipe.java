@@ -34,6 +34,7 @@ public class Recipe {
   // double rating;
   String createdAt;
   String updatedAt;
+  @Builder.Default
   List<Ingredient> ingredients = new ArrayList<>();
 
 }
