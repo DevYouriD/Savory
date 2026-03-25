@@ -1,4 +1,5 @@
 import { getAllRecipes } from "@/lib/recipes";
+import Link from "next/link";
 
 export default async function Data() {
     const recipes = await getAllRecipes();
@@ -21,45 +22,46 @@ export default async function Data() {
                 <div className="mx-auto mt-6 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-12 border-t border-border pt-6 sm:mt-10 sm:pt-10 lg:mx-0 lg:max-w-none lg:grid-cols-3">
 
                     {recipes.map((recipe) => (
-                        <article key={recipe.id} className="flex max-w-xl flex-col">
+                        <Link key={recipe.id} href={`/recipe-details/${recipe.id}`}>
+                            <article className="flex max-w-xl flex-col">
 
-                            {/* Image */}
-                            <div className="group relative w-full overflow-hidden rounded-t-xl">
-                                <img
-                                    src={recipe.imageUrl}
-                                    alt={recipe.title}
-                                    className="w-full h-60 object-cover transition-transform duration-300 group-hover:scale-110"
-                                />
-                            </div>
-
-                            {/* Content */}
-                            <div className="bg-card p-5 rounded-b-xl w-full">
-                                <h3 className="text-lg font-semibold text-card-foreground hover:text-muted-foreground">
-                                    <a href="#">{recipe.title}</a>
-                                </h3>
-
-                                <p className="mt-2 text-sm text-muted-foreground">
-                                    {recipe.description}
-                                </p>
-
-                                <div className="mt-3 text-sm flex items-center gap-x-4 flex-wrap text-muted-foreground">
-                                    <span>⏱ {recipe.preparationTime + recipe.cookingTime} min</span>
-                                    <span>🍽 {recipe.servings} servings</span>
-
-                                    {/* simple ingredient tags */}
-                                    {recipe.ingredients?.slice(0, 2).map((ing, i) => (
-                                        <span
-                                            key={i}
-                                            className="rounded-full bg-secondary px-3 py-1 text-secondary-foreground"
-                                        >
-                                            {ing.name}
-                                        </span>
-                                    ))}
+                                {/* Image */}
+                                <div className="group relative w-full overflow-hidden rounded-t-xl">
+                                    <img
+                                        src={recipe.imageUrl}
+                                        alt={recipe.title}
+                                        className="w-full h-60 object-cover transition-transform duration-300 group-hover:scale-110"
+                                    />
                                 </div>
-                            </div>
-                        </article>
-                    ))}
 
+                                {/* Content */}
+                                <div className="bg-card p-5 rounded-b-xl w-full">
+                                    <h3 className="text-lg font-semibold text-card-foreground">
+                                        {recipe.title}
+                                    </h3>
+
+                                    <p className="mt-2 text-sm text-muted-foreground">
+                                        {recipe.description}
+                                    </p>
+
+                                    <div className="mt-3 text-sm flex items-center gap-x-4 flex-wrap text-muted-foreground">
+                                        <span>⏱ {recipe.preparationTime + recipe.cookingTime} min</span>
+                                        <span>🍽 {recipe.servings} servings</span>
+
+                                        {/* simple ingredient tags */}
+                                        {recipe.ingredients?.slice(0, 2).map((ing, i) => (
+                                            <span
+                                                key={i}
+                                                className="rounded-full bg-secondary px-3 py-1 text-secondary-foreground"
+                                            >
+                                                {ing.name}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            </article>
+                        </Link>
+                    ))}
                 </div>
             </div>
         </div>

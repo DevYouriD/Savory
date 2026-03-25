@@ -1,5 +1,26 @@
 import { graphqlRequest } from "./graphql";
 
+// TYPES
+
+// TODO: REPLACE ALL ANY TYPES BY ACTUAL EXPLICIT TYPES
+
+export type IngredientInput = {
+    name: string;
+    unit: string;
+    quantity: number;
+};
+
+export type RecipeInput = {
+    title: string;
+    description: string;
+    instructions: string;
+    imageUrl: string;
+    preparationTime: number;
+    cookingTime: number;
+    servings: number;
+    ingredients: IngredientInput[];
+};
+
 // CREATE
 
 export async function createRecipe(input: any) {
@@ -73,3 +94,35 @@ export async function getRecipeById(id: string) {
 
     return data.findRecipeById;
 }
+
+// UPDATE
+
+export async function updateRecipe(id: string, input: any) {
+    const mutation = `
+    mutation UpdateRecipe($id: ID!, $input: RecipeInput!) {
+      updateRecipe(id: $id, input: $input) {
+        id
+        title
+        description
+        instructions
+        imageUrl
+        preparationTime
+        cookingTime
+        servings
+        ingredients {
+          name
+          unit
+          quantity
+        }
+      }
+    }
+  `;
+
+    const data = await graphqlRequest<{
+        updateRecipe: any;
+    }>(mutation, { id, input });
+
+    return data.updateRecipe;
+}
+
+// DELETE
