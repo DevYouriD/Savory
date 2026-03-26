@@ -86,28 +86,116 @@ export default function EditRecipeForm({ recipe }: Props) {
 
     return (
         <form onSubmit={handleSubmit} className="space-y-6 max-w-3xl mx-auto p-6">
-            <input name="title" value={form.title} onChange={handleChange} placeholder="Title" className="w-full border p-3 rounded" />
-            <textarea name="description" value={form.description} onChange={handleChange} placeholder="Description" className="w-full border p-3 rounded" />
-            <textarea name="instructions" value={form.instructions} onChange={handleChange} placeholder="Instructions" className="w-full border p-3 rounded h-32" />
-            <input name="imageUrl" value={form.imageUrl} onChange={handleChange} placeholder="Image URL" className="w-full border p-3 rounded" />
+            <div>
+                <label className="block mb-1 font-semibold">Title</label>
+                <input
+                    name="title"
+                    value={form.title}
+                    onChange={handleChange}
+                    className="w-full border p-3 rounded"
+                />
+            </div>
+
+            <div>
+                <label className="block mb-1 font-semibold">Description</label>
+                <textarea
+                    name="description"
+                    value={form.description}
+                    onChange={handleChange}
+                    className="w-full border p-3 rounded"
+                />
+            </div>
+
+            <div>
+                <label className="block mb-1 font-semibold">Instructions</label>
+                <textarea
+                    name="instructions"
+                    value={form.instructions}
+                    onChange={handleChange}
+                    className="w-full border p-3 rounded h-32"
+                />
+            </div>
+
+            <div>
+                <label className="block mb-1 font-semibold">Image URL</label>
+                <input
+                    name="imageUrl"
+                    value={form.imageUrl}
+                    onChange={handleChange}
+                    className="w-full border p-3 rounded"
+                />
+            </div>
 
             <div className="grid grid-cols-3 gap-4">
-                <input type="number" name="preparationTime" value={form.preparationTime} onChange={handleChange} placeholder="Prep time" className="border p-3 rounded" />
-                <input type="number" name="cookingTime" value={form.cookingTime} onChange={handleChange} placeholder="Cook time" className="border p-3 rounded" />
-                <input type="number" name="servings" value={form.servings} onChange={handleChange} placeholder="Servings" className="border p-3 rounded" />
+                <div>
+                    <label className="block mb-1 font-semibold">Prep Time (min)</label>
+                    <input
+                        type="number"
+                        name="preparationTime"
+                        value={form.preparationTime}
+                        onChange={handleChange}
+                        className="border p-3 rounded w-full"
+                    />
+                </div>
+
+                <div>
+                    <label className="block mb-1 font-semibold">Cook Time (min)</label>
+                    <input
+                        type="number"
+                        name="cookingTime"
+                        value={form.cookingTime}
+                        onChange={handleChange}
+                        className="border p-3 rounded w-full"
+                    />
+                </div>
+
+                <div>
+                    <label className="block mb-1 font-semibold">Servings</label>
+                    <input
+                        type="number"
+                        name="servings"
+                        value={form.servings}
+                        onChange={handleChange}
+                        className="border p-3 rounded w-full"
+                    />
+                </div>
             </div>
 
             <div>
                 <h2 className="text-xl font-semibold mb-3">Ingredients</h2>
+
+                {/* Header labels */}
+                <div className="flex gap-2 mb-2 font-semibold text-sm">
+                    <span className="flex-1">Name</span>
+                    <span className="w-24">Unit</span>
+                    <span className="w-24">Quantity</span>
+                    <span className="w-6"></span> {/* for the delete button */}
+                </div>
+
+                {/* Ingredient inputs */}
                 {form.ingredients.map((ing, i) => (
-                    <div key={i} className="flex gap-2 mb-2">
-                        <input value={ing.name} onChange={(e) => handleIngredientChange(i, "name", e.target.value)} placeholder="Name" className="border p-2 rounded w-full" />
-                        <input value={ing.unit} onChange={(e) => handleIngredientChange(i, "unit", e.target.value)} placeholder="Unit" className="border p-2 rounded w-24" />
-                        <input type="number" value={ing.quantity} onChange={(e) => handleIngredientChange(i, "quantity", e.target.value)} placeholder="Qty" className="border p-2 rounded w-24" />
+                    <div key={i} className="flex gap-2 mb-2 items-end">
+                        <input
+                            value={ing.name}
+                            onChange={(e) => handleIngredientChange(i, "name", e.target.value)}
+                            className="border p-2 rounded flex-1"
+                        />
+                        <input
+                            value={ing.unit}
+                            onChange={(e) => handleIngredientChange(i, "unit", e.target.value)}
+                            className="border p-2 rounded w-24"
+                        />
+                        <input
+                            type="number"
+                            value={ing.quantity}
+                            onChange={(e) => handleIngredientChange(i, "quantity", e.target.value)}
+                            className="border p-2 rounded w-24"
+                        />
                         <button type="button" onClick={() => removeIngredient(i)} className="text-red-500">✕</button>
                     </div>
                 ))}
-                <button type="button" onClick={addIngredient} className="text-blue-500 text-sm">+ Add Ingredient</button>
+
+                <button type="button" onClick={addIngredient} className="text-blue-500 text-sm mt-2">+ Add Ingredient</button>
             </div>
 
             <button type="submit" className="bg-black text-white px-6 py-3 rounded hover:opacity-90">Save Changes</button>
