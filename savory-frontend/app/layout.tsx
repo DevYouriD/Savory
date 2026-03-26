@@ -27,6 +27,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
 
     return (
         <html lang="en" className={cn("font-mono", jetbrainsMono.variable)}>
+        <link rel="icon" href="/chicken.svg" />
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex`}>
         {mounted && (
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>

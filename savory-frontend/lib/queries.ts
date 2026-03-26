@@ -68,6 +68,24 @@ export async function getAllRecipes() {
     return data.findAllRecipes;
 }
 
+export async function getAllRecipesForIndex() {
+    const query = `
+    query {
+    findAllRecipes {
+      id
+      title
+      createdAt
+      }
+    }
+    `;
+
+    const data = await graphqlRequest<{
+        findAllRecipes: any[];
+    }>(query);
+
+    return data.findAllRecipes;
+}
+
 export async function getRecipeById(id: string) {
     const query = `
     query GetRecipe($id: ID!) {
