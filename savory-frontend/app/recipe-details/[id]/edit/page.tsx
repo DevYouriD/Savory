@@ -1,5 +1,6 @@
-import { getRecipeById } from "@/lib/recipes";
-import EditRecipeForm from "./EditRecipeForm";
+import { getRecipeById } from "@/lib/queries";
+import EditRecipeForm from "@/components/EditRecipeForm";
+import { notFound } from "next/navigation";
 
 interface EditRecipePageProps {
     params: { id: string };

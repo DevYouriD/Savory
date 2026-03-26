@@ -1,3 +1,5 @@
+"use server";
+
 import { graphqlRequest } from "./graphql";
 
 // TYPES
@@ -54,11 +56,7 @@ export async function getAllRecipes() {
       preparationTime
       cookingTime
       servings
-      ingredients {
-        name
-        quantity
-        unit
-        }
+      createdAt
       }
     }
     `;
@@ -79,10 +77,15 @@ export async function getRecipeById(id: string) {
         description
         instructions
         imageUrl
+        preparationTime
+        cookingTime
+        servings
+        createdAt
+        updatedAt
         ingredients {
           name
-          quantity
           unit
+          quantity
         }
       }
     }
@@ -99,29 +102,25 @@ export async function getRecipeById(id: string) {
 
 export async function updateRecipe(id: string, input: any) {
     const mutation = `
-    mutation UpdateRecipe($id: ID!, $input: RecipeInput!) {
-      updateRecipe(id: $id, input: $input) {
-        id
-        title
-        description
-        instructions
-        imageUrl
-        preparationTime
-        cookingTime
-        servings
-        ingredients {
-          name
-          unit
-          quantity
+      mutation UpdateRecipe($id: ID!, $input: RecipeInput!) {
+        updateRecipe(id: $id, input: $input) {
+          id
+          title
+          description
+          instructions
+          imageUrl
+          preparationTime
+          cookingTime
+          servings
+          ingredients {
+            name
+            unit
+            quantity
+          }
         }
       }
-    }
-  `;
-
-    const data = await graphqlRequest<{
-        updateRecipe: any;
-    }>(mutation, { id, input });
-
+    `;
+    const data = await graphqlRequest<{ updateRecipe: any }>(mutation, { id, input });
     return data.updateRecipe;
 }
 

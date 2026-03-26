@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
-import { updateRecipe } from "@/lib/recipes";
+import { updateRecipe, RecipeInput } from "@/lib/queries";
 
 export type Recipe = {
     id: string;
@@ -60,8 +60,11 @@ export default function EditRecipeForm({ recipe }: Props) {
         e.preventDefault();
 
         try {
-            await updateRecipe(recipe.id, {
-                ...form,
+            const input: RecipeInput = {
+                title: form.title,
+                description: form.description,
+                instructions: form.instructions,
+                imageUrl: form.imageUrl,
                 preparationTime: Number(form.preparationTime),
                 cookingTime: Number(form.cookingTime),
                 servings: Number(form.servings),
@@ -70,9 +73,12 @@ export default function EditRecipeForm({ recipe }: Props) {
                     unit: ing.unit,
                     quantity: Number(ing.quantity),
                 })),
-            });
+            };
 
-            router.push(`/recipe-details/${recipe.id}`);
+            const updatedRecipe = await updateRecipe(recipe.id, input);
+
+            router.push(`/recipe-details/${updatedRecipe.id}`);
+
         } catch (err) {
             console.error("Failed to update recipe", err);
         }

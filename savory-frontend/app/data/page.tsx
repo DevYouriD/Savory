@@ -1,4 +1,4 @@
-import { getAllRecipes } from "@/lib/recipes";
+import { getAllRecipes } from "@/lib/queries";
 import Link from "next/link";
 
 export default async function Data() {
@@ -45,18 +45,21 @@ export default async function Data() {
                                     </p>
 
                                     <div className="mt-3 text-sm flex items-center gap-x-4 flex-wrap text-muted-foreground">
-                                        <span>⏱ {recipe.preparationTime + recipe.cookingTime} min</span>
-                                        <span>🍽 {recipe.servings} servings</span>
+                                        <span>🕑 {recipe.preparationTime + recipe.cookingTime} min</span>
+                                        <span>🍽️ {recipe.servings} porties</span>
 
-                                        {/* simple ingredient tags */}
-                                        {recipe.ingredients?.slice(0, 2).map((ing, i) => (
-                                            <span
-                                                key={i}
-                                                className="rounded-full bg-secondary px-3 py-1 text-secondary-foreground"
-                                            >
-                                                {ing.name}
-                                            </span>
-                                        ))}
+                                        {/* Tags Section */}
+
+                                        {/* TODO: Implement recipe Tags */}
+                                        {/*{recipe.tags?.slice(0, 2).map((tag, i) => (*/}
+                                        {/*    <span*/}
+                                        {/*        key={i}*/}
+                                        {/*        className="rounded-full bg-secondary px-3 py-1 text-secondary-foreground"*/}
+                                        {/*    >*/}
+                                        {/*        {tag.name}*/}
+                                        {/*    </span>*/}
+                                        {/*))}*/}
+
                                     </div>
                                 </div>
                             </article>

@@ -1,4 +1,4 @@
-import { getRecipeById } from "@/lib/recipes";
+import { getRecipeById } from "@/lib/queries";
 import Link from "next/link";
 
 export default async function RecipeDetailsPage({ params }) {
