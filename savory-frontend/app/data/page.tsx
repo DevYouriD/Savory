@@ -23,10 +23,10 @@ export default async function Data() {
 
                     {recipes.map((recipe) => (
                         <Link key={recipe.id} href={`/recipe-details/${recipe.id}`}>
-                            <article className="flex max-w-xl flex-col">
+                            <article className="flex max-w-xl flex-col border border-border rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
 
                                 {/* Image */}
-                                <div className="group relative w-full overflow-hidden rounded-t-xl">
+                                <div className="group relative w-full overflow-hidden">
                                     <img
                                         src={recipe.imageUrl}
                                         alt={recipe.title}
@@ -35,7 +35,7 @@ export default async function Data() {
                                 </div>
 
                                 {/* Content */}
-                                <div className="bg-card p-5 rounded-b-xl w-full">
+                                <div className="bg-card p-5 w-full">
                                     <h3 className="text-lg font-semibold text-card-foreground">
                                         {recipe.title}
                                     </h3>
@@ -44,9 +44,32 @@ export default async function Data() {
                                         {recipe.description}
                                     </p>
 
-                                    <div className="mt-3 text-sm flex items-center gap-x-4 flex-wrap text-muted-foreground">
-                                        <span>🕑 {recipe.preparationTime + recipe.cookingTime} min</span>
-                                        <span>🍽️ {recipe.servings} porties</span>
+                                    <div className="mt-3 text-sm text-muted-foreground flex flex-col gap-y-1">
+                                        {/* Prep time + servings on the same line */}
+                                        <div className="flex items-center gap-x-4 flex-wrap">
+                                            <span>🕑 {recipe.preparationTime + recipe.cookingTime} min</span>
+                                            <span>🍽️ {recipe.servings} porties</span>
+                                        </div>
+
+                                        {/* Custom formatted date */}
+                                        <div>
+                                            <span>📆 {new Date(recipe.createdAt).toLocaleDateString('nl-NL', {
+                                                day: 'numeric',
+                                                month: 'long',
+                                                year: 'numeric',
+                                            })}</span>
+
+                                        {/* Tags Section */}
+                                        {/* TODO: Implement recipe Tags */}
+                                        {/* {recipe.tags?.slice(0, 2).map((tag, i) => (
+                                        <span
+                                          key={i}
+                                          className="rounded-full bg-secondary px-3 py-1 text-secondary-foreground"
+                                        >
+                                          {tag.name}
+                                        </span>
+                                      ))} */}
+                                    </div>
 
                                         {/* Tags Section */}
 
