@@ -3,6 +3,7 @@
 import { useState, FormEvent, ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
 import { updateRecipe, RecipeInput } from "@/lib/queries";
+import { useEffect, useRef } from "react";
 
 export type Recipe = {
     id: string;
@@ -84,121 +85,169 @@ export default function EditRecipeForm({ recipe }: Props) {
         }
     };
 
+    {/* Automatically reformat textarea based on content size */}
+
+    const instructionsRef = useRef<HTMLTextAreaElement>(null);
+
+    useEffect(() => {
+        const textarea = instructionsRef.current;
+        if (textarea) {
+            textarea.style.height = "auto";
+            textarea.style.height = textarea.scrollHeight + "px";
+        }
+    }, [form.instructions]);
+
+    const descriptionRef = useRef<HTMLTextAreaElement>(null);
+
+    useEffect(() => {
+        const textarea = descriptionRef.current;
+        if (textarea) {
+            textarea.style.height = "auto";
+            textarea.style.height = textarea.scrollHeight + "px";
+        }
+    }, [form.description]);
+
+    // Helper function to adjust height
+    const adjustTextareaHeight = (textarea: HTMLTextAreaElement | null) => {
+        if (textarea) {
+            textarea.style.height = "auto";
+            textarea.style.height = textarea.scrollHeight + "px";
+        }
+    };
+
+    // Resize effect for responsiveness
+    useEffect(() => {
+        const handleResize = () => {
+            adjustTextareaHeight(descriptionRef.current);
+            adjustTextareaHeight(instructionsRef.current);
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        // Run once to adjust on mount
+        handleResize();
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
     return (
-        <form onSubmit={handleSubmit} className="space-y-6 max-w-3xl mx-auto p-6">
-            <div>
-                <label className="block mb-1 font-semibold">Title</label>
+        <form onSubmit={handleSubmit} className="space-y-12 max-w-3xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md">
+            <div className="space-y-2">
+                <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">Title</label>
                 <input
                     name="title"
                     value={form.title}
                     onChange={handleChange}
-                    className="w-full border p-3 rounded"
+                    className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
                 />
             </div>
 
-            <div>
-                <label className="block mb-1 font-semibold">Description</label>
+            <div className="space-y-2">
+                <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">Description</label>
                 <textarea
                     name="description"
+                    ref={descriptionRef}
                     value={form.description}
                     onChange={handleChange}
-                    className="w-full border p-3 rounded"
+                    onInput={(e) => {
+                        const target = e.target as HTMLTextAreaElement;
+                        target.style.height = "auto";
+                        target.style.height = target.scrollHeight + "px";
+                    }}
+                    className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none overflow-hidden resize-none"
                 />
             </div>
 
-            <div>
-                <label className="block mb-1 font-semibold">Instructions</label>
+            <div className="space-y-2">
+                <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">Instructions</label>
                 <textarea
                     name="instructions"
+                    ref={instructionsRef}
                     value={form.instructions}
                     onChange={handleChange}
-                    className="w-full border p-3 rounded h-32"
+                    onInput={(e) => {
+                        const target = e.target as HTMLTextAreaElement;
+                        target.style.height = "auto";
+                        target.style.height = target.scrollHeight + "px";
+                    }}
+                    className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none overflow-hidden resize-none"
                 />
             </div>
 
-            <div>
-                <label className="block mb-1 font-semibold">Image URL</label>
+            <div className="space-y-2">
+                <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">Image URL</label>
                 <input
                     name="imageUrl"
                     value={form.imageUrl}
                     onChange={handleChange}
-                    className="w-full border p-3 rounded"
+                    className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
                 />
             </div>
 
             <div className="grid grid-cols-3 gap-4">
-                <div>
-                    <label className="block mb-1 font-semibold">Prep Time (min)</label>
-                    <input
-                        type="number"
-                        name="preparationTime"
-                        value={form.preparationTime}
-                        onChange={handleChange}
-                        className="border p-3 rounded w-full"
-                    />
-                </div>
-
-                <div>
-                    <label className="block mb-1 font-semibold">Cook Time (min)</label>
-                    <input
-                        type="number"
-                        name="cookingTime"
-                        value={form.cookingTime}
-                        onChange={handleChange}
-                        className="border p-3 rounded w-full"
-                    />
-                </div>
-
-                <div>
-                    <label className="block mb-1 font-semibold">Servings</label>
-                    <input
-                        type="number"
-                        name="servings"
-                        value={form.servings}
-                        onChange={handleChange}
-                        className="border p-3 rounded w-full"
-                    />
-                </div>
+                {["Prep Time (min)", "Cook Time (min)", "Servings"].map((label, idx) => {
+                    const name = ["preparationTime", "cookingTime", "servings"][idx];
+                    return (
+                        <div key={name} className="space-y-2">
+                            <label className="block font-semibold text-gray-700 dark:text-gray-200 text-center w-full">{label}</label>
+                            <input
+                                type="number"
+                                name={name}
+                                value={form[name]}
+                                onChange={handleChange}
+                                className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                            />
+                        </div>
+                    );
+                })}
             </div>
 
             <div>
-                <h2 className="text-xl font-semibold mb-3">Ingredients</h2>
+                <h2 className="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-100">Ingredients</h2>
 
                 {/* Header labels */}
-                <div className="flex gap-2 mb-2 font-semibold text-sm">
-                    <span className="flex-1">Name</span>
-                    <span className="w-24">Unit</span>
-                    <span className="w-24">Quantity</span>
-                    <span className="w-6"></span> {/* for the delete button */}
+                <div className="flex gap-2 mb-2 font-semibold items-center text-gray-700 dark:text-gray-200">
+                    <span className="flex-1 text-center">Name</span>
+                    <span className="w-24 text-center">Unit</span>
+                    <span className="w-24 text-center">Quantity</span>
+                    <span className="w-6"></span> {/* placeholder for the delete button */}
                 </div>
 
                 {/* Ingredient inputs */}
                 {form.ingredients.map((ing, i) => (
-                    <div key={i} className="flex gap-2 mb-2 items-end">
+                    <div key={i} className="flex gap-2 mb-2 items-center">
                         <input
                             value={ing.name}
                             onChange={(e) => handleIngredientChange(i, "name", e.target.value)}
-                            className="border p-2 rounded flex-1"
+                            className="border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg flex-1 focus:ring-2 focus:ring-blue-400 focus:outline-none"
                         />
                         <input
                             value={ing.unit}
                             onChange={(e) => handleIngredientChange(i, "unit", e.target.value)}
-                            className="border p-2 rounded w-24"
+                            className="border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg w-24 text-center focus:ring-2 focus:ring-blue-400 focus:outline-none"
                         />
                         <input
                             type="number"
                             value={ing.quantity}
                             onChange={(e) => handleIngredientChange(i, "quantity", e.target.value)}
-                            className="border p-2 rounded w-24"
+                            className="border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg w-24 text-center focus:ring-2 focus:ring-blue-400 focus:outline-none"
                         />
-                        <button type="button" onClick={() => removeIngredient(i)} className="text-red-500">✕</button>
+                        <button
+                            type="button"
+                            onClick={() => removeIngredient(i)}
+                            className="text-red-500 font-bold text-lg cursor-pointer flex-shrink-0"
+                        >
+                            ✕
+                        </button>
                     </div>
                 ))}
 
                 <button type="button" onClick={addIngredient} className="text-blue-500 text-sm mt-2">+ Add Ingredient</button>
             </div>
 
-            <button type="submit" className="bg-black text-white px-6 py-3 rounded hover:opacity-90">Save Changes</button>
+            <button type="submit" className="bg-green-800 cursor-pointer text-white px-6 py-3 rounded hover:opacity-90 mt-4 w-full">Save Changes</button>
         </form>
     );
 }

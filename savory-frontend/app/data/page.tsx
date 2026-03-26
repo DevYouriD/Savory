@@ -59,30 +59,17 @@ export default async function Data() {
                                                 year: 'numeric',
                                             })}</span>
 
-                                        {/* Tags Section */}
-                                        {/* TODO: Implement recipe Tags */}
-                                        {/* {recipe.tags?.slice(0, 2).map((tag, i) => (
-                                        <span
-                                          key={i}
-                                          className="rounded-full bg-secondary px-3 py-1 text-secondary-foreground"
-                                        >
-                                          {tag.name}
-                                        </span>
-                                      ))} */}
-                                    </div>
-
-                                        {/* Tags Section */}
-
-                                        {/* TODO: Implement recipe Tags */}
-                                        {/*{recipe.tags?.slice(0, 2).map((tag, i) => (*/}
-                                        {/*    <span*/}
-                                        {/*        key={i}*/}
-                                        {/*        className="rounded-full bg-secondary px-3 py-1 text-secondary-foreground"*/}
-                                        {/*    >*/}
-                                        {/*        {tag.name}*/}
-                                        {/*    </span>*/}
-                                        {/*))}*/}
-
+                                            {/* Tags Section */}
+                                            {/* TODO: Implement recipe Tags */}
+                                            {/* {recipe.tags?.slice(0, 2).map((tag, i) => (
+                                            <span
+                                              key={i}
+                                              className="rounded-full bg-secondary px-3 py-1 text-secondary-foreground"
+                                            >
+                                              {tag.name}
+                                            </span>
+                                          ))} */}
+                                        </div>
                                     </div>
                                 </div>
                             </article>
