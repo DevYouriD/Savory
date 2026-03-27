@@ -14,13 +14,13 @@ export default async function EditRecipePage({ params }: EditRecipePageProps) {
     return (
         <div className="py-6 sm:py-8 flex-1 flex flex-col">
 
-            {/* Breadcrumb: same max-width as form */}
-            <div className="max-w-3xl mx-auto w-full mt-4 px-6 lg:px-8">
+            {/* Breadcrumb */}
+            <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto max-w-md sm:max-w-3xl lg:max-w-4xl mt-4">
                 <AppBreadcrumb recipeTitle={recipe.title} />
             </div>
 
-            {/* Form: same max-width and padding as breadcrumb */}
-            <div className="py-6 sm:py-12 max-w-3xl mx-auto w-full px-6 lg:px-8">
+            {/* Form */}
+            <div className="w-full px-4 sm:px-6 lg:px-8 mx-auto max-w-md sm:max-w-3xl lg:max-w-4xl py-6 sm:py-12">
                 <EditRecipeForm recipe={recipe} />
             </div>
 

@@ -147,7 +147,7 @@ export default function EditRecipeForm({ recipe }: Props) {
 
     return (
         <>
-            <form onSubmit={handleSubmit} className="space-y-12 max-w-3xl mx-auto p-6 pt-6 sm:pt-8 bg-white dark:bg-gray-800 rounded-xl shadow-md">
+            <form onSubmit={handleSubmit} className="space-y-12 mx-auto p-6 pt-6 sm:pt-8 bg-white dark:bg-gray-800 rounded-xl shadow-md">
                 <div className="space-y-2">
                     <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">Title</label>
                     <input
@@ -200,7 +200,7 @@ export default function EditRecipeForm({ recipe }: Props) {
                     />
                 </div>
 
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {["Prep Time (min)", "Cook Time (min)", "Servings"].map((label, idx) => {
                         const name = ["preparationTime", "cookingTime", "servings"][idx];
                         return (
@@ -222,20 +222,20 @@ export default function EditRecipeForm({ recipe }: Props) {
                     <h2 className="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-100">Ingredients</h2>
 
                     {/* Header labels */}
-                    <div className="flex gap-2 mb-2 font-semibold items-center text-gray-700 dark:text-gray-200">
-                        <span className="flex-1 text-center">Name</span>
+                    <div className="flex flex-wrap gap-2 mb-2 font-semibold items-center text-gray-700 dark:text-gray-200">
+                        <span className="flex-1 min-w-[100px] text-center">Name</span>
                         <span className="w-24 text-center">Unit</span>
                         <span className="w-24 text-center">Quantity</span>
-                        <span className="w-6"></span> {/* placeholder for the delete button */}
+                        <span className="w-6"></span> {/* delete button */}
                     </div>
 
                     {/* Ingredient inputs */}
                     {form.ingredients.map((ing, i) => (
-                        <div key={i} className="flex gap-2 mb-2 items-center">
+                        <div key={i} className="flex flex-wrap gap-2 mb-2 items-center">
                             <input
                                 value={ing.name}
                                 onChange={(e) => handleIngredientChange(i, "name", e.target.value)}
-                                className="border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg flex-1 focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                                className="border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg flex-1 min-w-[100px] focus:ring-2 focus:ring-blue-400 focus:outline-none"
                             />
                             <input
                                 value={ing.unit}

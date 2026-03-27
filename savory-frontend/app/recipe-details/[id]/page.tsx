@@ -8,24 +8,20 @@ export default async function RecipeDetailsPage({ params }) {
 
     return (
         <div className="py-6 sm:py-8 flex-1 flex flex-col">
-            <div className="mx-auto px-6 py-10 w-full min-w-[320px] max-w-4xl relative">
+            <div className="max-w-4xl mx-auto w-full px-6 lg:px-8 relative">
 
-                {/* Breadcrumb with recipe title */}
-                <div className="mx-auto max-w-7xl w-full mt-4 py-6">
+                {/* Breadcrumb */}
+                <div className="w-full mt-4">
                     <AppBreadcrumb recipeTitle={recipe.title} />
                 </div>
 
+                {/* Title and edit pencil */}
                 <div className="flex justify-between items-center mb-4">
                     {/* TITLE */}
-                    <h1 className="text-4xl font-bold">{recipe.title}</h1>
+                    <h1 className="text-4xl font-bold pt-6 sm:pt-12">{recipe.title}</h1>
 
                     {/* EDIT RECIPE */}
-                    <Link
-                        href={`/recipe-details/${id}/edit`}
-                        className="text-xl hover:scale-110 transition"
-                    >
-                        ✏️
-                    </Link>
+                    <Link href={`/recipe-details/${id}/edit`} className="text-xl hover:scale-110 transition">✏️</Link>
                 </div>
 
                 {/* IMAGE */}
