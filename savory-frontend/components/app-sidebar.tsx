@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Link from "next/link";
 
 import {SearchForm} from "@/components/search-form"
 import {Collapsible, CollapsibleContent, CollapsibleTrigger,} from "@/components/ui/collapsible"
@@ -22,31 +23,26 @@ import {ModeToggle} from "@/components/ui/mode-toggle";
 const data = {
   navMain: [
     {
-      title: "Aperitif",
+      title: "Aperitief",
       url: "#",
       items: [],
     },
     {
-      title: "Appetizers",
+      title: "Voorgerechten",
       url: "#",
       items: [],
     },
     {
-      title: "Main Courses",
+      title: "Hoofdgerechten",
       url: "#",
       items: [],
     },
     {
-      title: "Deserts",
+      title: "Nagerechten",
       url: "#",
       items: [
         {
           title: "Tiramisu",
-          url: "#",
-          // isActive: true,
-        },
-        {
-          title: "Chocolate Mousse",
           url: "#",
           // isActive: true,
         },
@@ -101,7 +97,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarGroup>
           </Collapsible>
         ))}
-        <div className="mt-auto px-4 py-4">
+        <div className="mt-auto px-4 py-4 flex flex-col gap-4">
+          <Link
+              href="/create-recipe"
+              className="bg-green-800 text-white text-center px-4 py-2 rounded hover:bg-green-700 transition"
+          >
+            + Create New Recipe
+          </Link>
+
           <ModeToggle />
         </div>
       </SidebarContent>

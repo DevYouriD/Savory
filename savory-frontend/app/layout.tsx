@@ -36,7 +36,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                     <AppSidebar />
                     <main className="flex-1 flex flex-col">
                         <SidebarTrigger />
-                        {/*<div className="mx-auto max-w-7xl px-6 lg:px-8 w-full mt-4"><AppBreadcrumb /></div>*/}
                         {children}
                     </main>
                 </SidebarProvider>

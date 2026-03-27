@@ -28,14 +28,16 @@ export function AppBreadcrumb({ recipeTitle }: AppBreadcrumbProps) {
     const isObjectId = (s: string) => /^[a-f0-9]{24}$/.test(s);
 
     function getLabel(segment: string, recipeTitle?: string) {
-        console.log(/^\d+$/.test(segment));
-
         if (isObjectId(segment) && recipeTitle) return recipeTitle;
-        if (segment === "recipe-details") return "Recipes";
-        if (segment === "edit") return "Edit";
-        return segment;
-    }
 
+        const segmentMap: Record<string, string> = {
+            "recipe-details": "Recipes",
+            edit: "Edit",
+            "create-recipe": "New Recipe",
+        };
+
+        return segmentMap[segment] ?? segment.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase());
+    }
 
     return (
         <Breadcrumb>
