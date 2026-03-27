@@ -9,5 +9,10 @@ interface EditRecipePageProps {
 export default async function EditRecipePage({ params }: EditRecipePageProps) {
     const { id } = await params;
     const recipe = await getRecipeById(id);
-    return <EditRecipeForm recipe={recipe} />;
+
+    return (
+        <div className="py-6 sm:py-12">
+            <EditRecipeForm recipe={recipe} />
+        </div>
+    );
 }

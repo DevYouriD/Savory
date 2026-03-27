@@ -40,27 +40,27 @@ export function AppBreadcrumb() {
 
                     const label =
                         segment === "recipe-details"
-                            ? "Recipe"
+                            ? "Recipes"
                             : segment === "edit"
                                 ? "Edit"
                                 : segment;
 
                     return (
                         <span key={index} className="flex items-center gap-1">
-                        <BreadcrumbSeparator />
+                            <BreadcrumbSeparator />
 
-                        <BreadcrumbItem>
-                            {isLast || isDisabled ? (
-                                <BreadcrumbPage>{label}</BreadcrumbPage>
-                            ) : (
-                                <BreadcrumbLink asChild>
-                                    <Link href={buildHref(index)}>
-                                        {label}
-                                    </Link>
-                                </BreadcrumbLink>
-                            )}
-                        </BreadcrumbItem>
-                    </span>
+                            <BreadcrumbItem>
+                                {isLast || isDisabled ? (
+                                    <BreadcrumbPage>{label}</BreadcrumbPage>
+                                ) : (
+                                    <BreadcrumbLink asChild>
+                                        <Link href={buildHref(index)}>
+                                            {label}
+                                        </Link>
+                                    </BreadcrumbLink>
+                                )}
+                            </BreadcrumbItem>
+                        </span>
                     );
                 })}
             </BreadcrumbList>

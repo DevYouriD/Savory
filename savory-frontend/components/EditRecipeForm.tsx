@@ -147,7 +147,7 @@ export default function EditRecipeForm({ recipe }: Props) {
 
     return (
         <>
-            <form onSubmit={handleSubmit} className="space-y-12 max-w-3xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md">
+            <form onSubmit={handleSubmit} className="space-y-12 max-w-3xl mx-auto p-6 pt-6 sm:pt-8 bg-white dark:bg-gray-800 rounded-xl shadow-md">
                 <div className="space-y-2">
                     <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">Title</label>
                     <input
