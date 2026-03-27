@@ -1,6 +1,7 @@
 import { getRecipeById } from "@/lib/queries";
 import EditRecipeForm from "@/components/EditRecipeForm";
 import { notFound } from "next/navigation";
+import { AppBreadcrumb } from "@/components/app-breadcrumb";
 
 interface EditRecipePageProps {
     params: { id: string };
@@ -11,8 +12,16 @@ export default async function EditRecipePage({ params }: EditRecipePageProps) {
     const recipe = await getRecipeById(id);
 
     return (
-        <div className="py-6 sm:py-12">
-            <EditRecipeForm recipe={recipe} />
+        <div className="py-6 sm:py-8 flex-1 flex flex-col">
+            {/* Breadcrumb */}
+            <div className="max-w-3xl mx-auto w-full mt-4">
+                <AppBreadcrumb recipeTitle={recipe.title} />
+            </div>
+
+            {/* Form */}
+            <div className="py-6 sm:py-12">
+                <EditRecipeForm recipe={recipe} />
+            </div>
         </div>
     );
 }

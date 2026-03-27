@@ -12,7 +12,11 @@ import {
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-export function AppBreadcrumb() {
+interface AppBreadcrumbProps {
+    recipeTitle?: string;
+}
+
+export function AppBreadcrumb({ recipeTitle }: AppBreadcrumbProps) {
     const pathname = usePathname();
 
     const segments = pathname.split("/").filter(Boolean);
@@ -20,6 +24,18 @@ export function AppBreadcrumb() {
     const buildHref = (index: number) => {
         return "/" + segments.slice(0, index + 1).join("/");
     };
+
+    const isObjectId = (s: string) => /^[a-f0-9]{24}$/.test(s);
+
+    function getLabel(segment: string, recipeTitle?: string) {
+        console.log(/^\d+$/.test(segment));
+
+        if (isObjectId(segment) && recipeTitle) return recipeTitle;
+        if (segment === "recipe-details") return "Recipes";
+        if (segment === "edit") return "Edit";
+        return segment;
+    }
+
 
     return (
         <Breadcrumb>
@@ -38,12 +54,7 @@ export function AppBreadcrumb() {
                     // Make this segment non-clickable
                     const isDisabled = segment === "recipe-details";
 
-                    const label =
-                        segment === "recipe-details"
-                            ? "Recipes"
-                            : segment === "edit"
-                                ? "Edit"
-                                : segment;
+                    const label = getLabel(segment, recipeTitle);
 
                     return (
                         <span key={index} className="flex items-center gap-1">

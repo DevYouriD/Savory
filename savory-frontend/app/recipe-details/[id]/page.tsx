@@ -1,5 +1,6 @@
 import { getRecipeById } from "@/lib/queries";
 import Link from "next/link";
+import { AppBreadcrumb } from "@/components/app-breadcrumb";
 
 export default async function RecipeDetailsPage({ params }) {
     const { id } = await params;
@@ -9,8 +10,12 @@ export default async function RecipeDetailsPage({ params }) {
         <div className="py-6 sm:py-8 flex-1 flex flex-col">
             <div className="max-w-4xl mx-auto px-6 py-10 relative">
 
-                {/* EDIT RECIPE */}
+                {/* Breadcrumb with recipe title */}
+                <div className="mx-auto max-w-7xl w-full mt-4 py-6">
+                    <AppBreadcrumb recipeTitle={recipe.title} />
+                </div>
 
+                {/* EDIT RECIPE */}
                 <Link
                     href={`/recipe-details/${id}/edit`}
                     className="absolute top-6 right-6 text-xl hover:scale-110 transition"
