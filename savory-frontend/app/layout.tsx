@@ -7,6 +7,7 @@ import {AppSidebar} from "@/components/app-sidebar";
 import {SidebarProvider, SidebarTrigger} from "@/components/ui/sidebar";
 import {ThemeProvider} from "next-themes";
 import React, {useEffect, useState} from "react";
+import { AppBreadcrumb } from "@/components/app-breadcrumb";
 
 const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
 
@@ -35,6 +36,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                     <AppSidebar />
                     <main className="flex-1 flex flex-col">
                         <SidebarTrigger />
+                        {/* ADD THIS WRAPPER */}
+                        <div className="mx-auto max-w-7xl px-6 lg:px-8 w-full mt-4">
+                            <AppBreadcrumb />
+                        </div>
                         {children}
                     </main>
                 </SidebarProvider>

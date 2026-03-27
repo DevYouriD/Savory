@@ -143,3 +143,14 @@ export async function updateRecipe(id: string, input: any) {
 }
 
 // DELETE
+
+export async function deleteRecipe(id: string) {
+    const mutation = `
+      mutation DeleteRecipe($id: ID!) {
+        deleteRecipe(id: $id)
+      }
+    `;
+
+    const data = await graphqlRequest<{ deleteRecipe: string }>(mutation, { id });
+    return data.deleteRecipe;
+}
