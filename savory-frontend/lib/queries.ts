@@ -28,10 +28,7 @@ export type RecipeInput = {
 export async function createRecipe(input: any) {
     const mutation = `
     mutation CreateRecipe($input: RecipeInput!) {
-      createRecipe(input: $input) {
-        id
-        title
-      }
+      createRecipe(input: $input) { }
     }
   `;
 
@@ -56,6 +53,7 @@ export async function getAllRecipes() {
       preparationTime
       cookingTime
       servings
+      category
       createdAt
       }
     }
@@ -98,6 +96,7 @@ export async function getRecipeById(id: string) {
         preparationTime
         cookingTime
         servings
+        category
         createdAt
         updatedAt
         ingredients {
@@ -130,6 +129,7 @@ export async function updateRecipe(id: string, input: any) {
           preparationTime
           cookingTime
           servings
+          category
           ingredients {
             name
             unit
