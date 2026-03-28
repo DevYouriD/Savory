@@ -27,7 +27,7 @@ public class Recipe {
   int preparationTime;
   int cookingTime;
   int servings;
-  // List<Category> categories;
+  Category category;
   // List<Tag> tags;
   // User author;
   // List<Comment> comments;

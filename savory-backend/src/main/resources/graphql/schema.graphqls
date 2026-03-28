@@ -5,13 +5,14 @@
 type Recipe {
   id: ID!
   title: String!
-  description: String!
-  instructions: String!
-  imageUrl: String!
-  preparationTime: Int!
-  cookingTime: Int!
-  servings: Int!
-  createdAt: String!
+  description: String
+  instructions: String
+  imageUrl: String
+  preparationTime: Int
+  cookingTime: Int
+  servings: Int
+  category: Category
+  createdAt: String
   updatedAt: String
   ingredients: [Ingredient!]
 }
@@ -19,8 +20,16 @@ type Recipe {
 type Ingredient {
   id: ID!
   name: String!
-  unit: String!
+  unit: String
   quantity: Float!
+}
+
+enum Category {
+  APERITIEF
+  VOORGERECHT
+  HOOFDGERECHT
+  NAGERECHT
+  COCKTAIL
 }
 
 # =====================
@@ -38,18 +47,19 @@ type Query {
 
 input RecipeInput {
   title: String!
-  description: String!
-  instructions: String!
-  imageUrl: String!
-  preparationTime: Int!
-  cookingTime: Int!
-  servings: Int!
+  description: String
+  instructions: String
+  imageUrl: String
+  preparationTime: Int
+  cookingTime: Int
+  servings: Int
+  category: Category
   ingredients: [IngredientInput!]
 }
 
 input IngredientInput {
   name: String!
-  unit: String!
+  unit: String
   quantity: Float!
 }
 
