@@ -49,7 +49,37 @@ const data = {
       ],
     },
     {
+      title: "Snacks",
+      url: "#",
+      items: [],
+    },
+    {
+      title: "Ontbijt",
+      url: "#",
+      items: [],
+    },
+    {
+      title: "Bakken",
+      url: "#",
+      items: [],
+    },
+    {
+      title: "Saus",
+      url: "#",
+      items: [],
+    },
+    {
+      title: "Drinken",
+      url: "#",
+      items: [],
+    },
+    {
       title: "Cocktails",
+      url: "#",
+      items: [],
+    },
+    {
+      title: "Anders",
       url: "#",
       items: [],
     },

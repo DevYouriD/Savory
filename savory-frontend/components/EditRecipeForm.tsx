@@ -69,6 +69,7 @@ export default function EditRecipeForm({ recipe }: Props) {
                 preparationTime: Number(form.preparationTime),
                 cookingTime: Number(form.cookingTime),
                 servings: Number(form.servings),
+                category: form.category,
                 ingredients: form.ingredients.map((ing) => ({
                     name: ing.name,
                     unit: ing.unit,
@@ -172,6 +173,35 @@ export default function EditRecipeForm({ recipe }: Props) {
                         }}
                         className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none overflow-hidden resize-none"
                     />
+                </div>
+
+                {/* CATEGORY */}
+                <div className="space-y-2">
+                    <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">Category</label>
+                    <select
+                        name="category"
+                        value={form.category}
+                        onChange={(e) => setForm((prev) => ({ ...prev, category: e.target.value }))}
+                        className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                    >
+                        {[
+                            "APERITIEF",
+                            "VOORGERECHT",
+                            "HOOFDGERECHT",
+                            "NAGERECHT",
+                            "SNACK",
+                            "ONTBIJT",
+                            "BAKKEN",
+                            "SAUS",
+                            "DRINKEN",
+                            "COCKTAIL",
+                            "OVERIGE",
+                        ].map((cat) => (
+                            <option key={cat} value={cat}>
+                                {cat}
+                            </option>
+                        ))}
+                    </select>
                 </div>
 
                 <div className="space-y-2">

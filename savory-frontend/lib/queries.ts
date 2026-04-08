@@ -20,21 +20,40 @@ export type RecipeInput = {
     preparationTime: number;
     cookingTime: number;
     servings: number;
+    category: Category;
     ingredients: IngredientInput[];
 };
 
+export enum Category {
+    APERITIEF = "APERITIEF",
+    VOORGERECHT = "VOORGERECHT",
+    HOOFDGERECHT = "HOOFDGERECHT",
+    NAGERECHT = "NAGERECHT",
+    SNACK = "SNACK",
+    ONTBIJT = "ONTBIJT",
+    BAKKEN = "BAKKEN",
+    SAUS = "SAUS",
+    DRINKEN = "DRINKEN",
+    COCKTAIL = "COCKTAIL",
+    OVERIGE = "OVERIGE"
+}
+
 // CREATE
 
-export async function createRecipe(input: any) {
+export async function createRecipe(input: RecipeInput) {
     const mutation = `
     mutation CreateRecipe($input: RecipeInput!) {
-      createRecipe(input: $input) { }
+      createRecipe(input: $input) {
+        id
+        title
+      }
     }
   `;
 
-    const data = await graphqlRequest<{
-        createRecipe: any;
-    }>(mutation, { input });
+    const data = await graphqlRequest<{ createRecipe: RecipeInput & { id: string } }>(
+        mutation,
+        { input }
+    );
 
     return data.createRecipe;
 }

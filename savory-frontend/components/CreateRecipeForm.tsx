@@ -16,12 +16,15 @@ export default function CreateRecipeForm() {
         preparationTime: 0,
         cookingTime: 0,
         servings: 1,
+        category: "OVERIGE",
         ingredients: [{ name: "", unit: "", quantity: 0 }],
     };
 
     const [form, setForm] = useState({ ...emptyRecipe });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    ) => {
         const { name, value } = e.target;
         setForm((prev) => ({ ...prev, [name]: value }));
     };
@@ -57,6 +60,7 @@ export default function CreateRecipeForm() {
             preparationTime: Number(form.preparationTime),
             cookingTime: Number(form.cookingTime),
             servings: Number(form.servings),
+            category: form.category,
             ingredients: form.ingredients.map((ing) => ({
                 name: ing.name,
                 unit: ing.unit,
@@ -97,6 +101,35 @@ export default function CreateRecipeForm() {
                     onChange={handleChange}
                     className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none"
                 />
+            </div>
+
+            {/* CATEGORY */}
+            <div className="space-y-2">
+                <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">Category</label>
+                <select
+                    name="category"
+                    value={form.category}
+                    onChange={handleChange}
+                    className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                >
+                    {[
+                        "APERITIEF",
+                        "VOORGERECHT",
+                        "HOOFDGERECHT",
+                        "NAGERECHT",
+                        "SNACK",
+                        "ONTBIJT",
+                        "BAKKEN",
+                        "SAUS",
+                        "DRINKEN",
+                        "COCKTAIL",
+                        "OVERIGE",
+                    ].map((cat) => (
+                        <option key={cat} value={cat}>
+                            {cat}
+                        </option>
+                    ))}
+                </select>
             </div>
 
             {/* Instructions */}

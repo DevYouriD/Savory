@@ -11,7 +11,7 @@ type Recipe {
   preparationTime: Int
   cookingTime: Int
   servings: Int
-  category: Category
+  category: Category!
   createdAt: String
   updatedAt: String
   ingredients: [Ingredient!]
@@ -29,7 +29,13 @@ enum Category {
   VOORGERECHT
   HOOFDGERECHT
   NAGERECHT
+  SNACK
+  ONTBIJT
+  BAKKEN
+  SAUS
+  DRINKEN
   COCKTAIL
+  OVERIGE
 }
 
 # =====================
@@ -53,7 +59,7 @@ input RecipeInput {
   preparationTime: Int
   cookingTime: Int
   servings: Int
-  category: Category
+  category: Category!
   ingredients: [IngredientInput!]
 }
 

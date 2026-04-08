@@ -14,8 +14,22 @@ export async function graphqlRequest<T>(
     const json = await res.json();
 
     if (json.errors) {
-        console.error(json.errors);
-        throw new Error("GraphQL Error");
+        const formatted = json.errors
+            .map(
+                (err: any) =>
+                    `Message: ${err.message}\nLocations: ${JSON.stringify(
+                        err.locations
+                    )}\nPath: ${err.path ?? "N/A"}\nExtensions: ${JSON.stringify(
+                        err.extensions
+                    )}`
+            )
+            .join("\n\n");
+
+        // Log for debugging
+        console.error("GraphQL Errors:\n", formatted);
+
+        // Throw with full detail
+        throw new Error(`GraphQL Error:\n${formatted}`);
     }
 
     return json.data;

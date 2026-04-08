@@ -5,5 +5,11 @@ public enum Category {
     VOORGERECHT,
     HOOFDGERECHT,
     NAGERECHT,
-    COCKTAIL
+    SNACK,
+    ONTBIJT,
+    BAKKEN,
+    SAUS,
+    DRINKEN,
+    COCKTAIL,
+    OVERIGE
 }
