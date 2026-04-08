@@ -37,6 +37,7 @@ const categories = [
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const [recipesByCategory, setRecipesByCategory] = React.useState<Record<string, any[]>>({});
   const [searchQuery, setSearchQuery] = React.useState("");
+  const [openCategories, setOpenCategories] = React.useState<Record<string, boolean>>({});
 
   React.useEffect(() => {
     async function fetchRecipes() {
@@ -54,16 +55,39 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       });
 
       setRecipesByCategory(grouped);
+
+      // Initialize openCategories to false
+      const initialOpen: Record<string, boolean> = {};
+      categories.forEach((cat) => (initialOpen[cat] = false));
+      setOpenCategories(initialOpen);
     }
 
     fetchRecipes();
   }, []);
 
-  // Filter for search input
+  // Filter items by search query
   const filterItems = (items: any[]) => {
     if (!searchQuery) return items;
     return items.filter((r) => r.title.toLowerCase().includes(searchQuery.toLowerCase()));
   };
+
+  React.useEffect(() => {
+    if (!searchQuery) {
+      // Close all tabs when search-bar is clear
+      const closed: Record<string, boolean> = {};
+      categories.forEach((cat) => (closed[cat] = false));
+      setOpenCategories(closed);
+      return;
+    }
+
+    // Only open matching categories when searching
+    const newOpen: Record<string, boolean> = {};
+    categories.forEach((cat) => {
+      const items = filterItems(recipesByCategory[cat] || []);
+      newOpen[cat] = items.length > 0;
+    });
+    setOpenCategories(newOpen);
+  }, [searchQuery, recipesByCategory]);
 
   return (
       <Sidebar {...props}>
@@ -80,7 +104,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             const items = filterItems(recipesByCategory[cat] || []);
 
             return (
-                <Collapsible key={cat} title={displayName} className="group/collapsible">
+                <Collapsible
+                    key={cat}
+                    title={displayName}
+                    open={openCategories[cat]}
+                    onOpenChange={(isOpen) =>
+                        setOpenCategories((prev) => ({ ...prev, [cat]: isOpen }))
+                    }
+                    className="group/collapsible"
+                >
                   <SidebarGroup>
                     <SidebarGroupLabel
                         asChild
