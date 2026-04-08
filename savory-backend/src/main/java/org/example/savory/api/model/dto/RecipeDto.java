@@ -9,9 +9,9 @@ import java.util.List;
 
 @Getter @Setter
 public class RecipeDto {
-    private String title;
-    private String description;
-    private String instructions;
+    private List<String> title;
+    private List<String> description;
+    private List<String> instructions;
     private String imageUrl;
     private int preparationTime;
     private int cookingTime;

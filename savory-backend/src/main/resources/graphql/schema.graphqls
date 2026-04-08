@@ -52,9 +52,9 @@ type Query {
 # =====================
 
 input RecipeInput {
-  title: String!
-  description: String
-  instructions: String
+  title: [String!]!
+  description: [String!]
+  instructions: [String!]
   imageUrl: String
   preparationTime: Int
   cookingTime: Int
@@ -64,7 +64,7 @@ input RecipeInput {
 }
 
 input IngredientInput {
-  name: String!
+  name: [String!]!
   unit: String
   quantity: Float!
 }

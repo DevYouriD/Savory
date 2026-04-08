@@ -20,20 +20,38 @@ public class Recipe {
 
   @Id
   String id;
-  String title;
-  String description;
-  String instructions;
+
+  // List of String for multi-language support (also applied to ingredient.name
+
+  @Builder.Default
+  List<String> title = new ArrayList<>();
+
+  @Builder.Default
+  List<String> description = new ArrayList<>();
+
+  @Builder.Default
+  List<String> instructions = new ArrayList<>();
+
   String imageUrl;
+
   int preparationTime;
+
   int cookingTime;
+
   int servings;
+
   Category category;
+
   // List<Tag> tags;
   // User author;
   // List<Comment> comments;
   // double rating;
+  // List<Note> notes;
+
   String createdAt;
+
   String updatedAt;
+
   @Builder.Default
   List<Ingredient> ingredients = new ArrayList<>();
 

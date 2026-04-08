@@ -56,7 +56,7 @@ export default function CreateRecipeForm() {
             title: form.title,
             description: form.description,
             instructions: form.instructions,
-            imageUrl: form.imageUrl,
+            imageUrl: form.imageUrl?.trim() || "https://placehold.co/600x400?text=No+Image",
             preparationTime: Number(form.preparationTime),
             cookingTime: Number(form.cookingTime),
             servings: Number(form.servings),
