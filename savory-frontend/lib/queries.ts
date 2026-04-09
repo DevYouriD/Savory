@@ -1,43 +1,7 @@
 "use server";
 
 import { graphqlRequest } from "./graphql";
-
-// TYPES
-
-// TODO: REPLACE ALL ANY TYPES BY ACTUAL EXPLICIT TYPES
-
-export type IngredientInput = {
-    name: string;
-    unit: string;
-    quantity: number;
-};
-
-export type RecipeInput = {
-    title: string;
-    description: string;
-    instructions: string;
-    imageUrl: string;
-    preparationTime: number;
-    cookingTime: number;
-    servings: number;
-    category: Category;
-    author: string;
-    ingredients: IngredientInput[];
-};
-
-export enum Category {
-    APERITIEF = "APERITIEF",
-    VOORGERECHT = "VOORGERECHT",
-    HOOFDGERECHT = "HOOFDGERECHT",
-    NAGERECHT = "NAGERECHT",
-    SNACK = "SNACK",
-    ONTBIJT = "ONTBIJT",
-    BAKKEN = "BAKKEN",
-    SAUS = "SAUS",
-    DRINKEN = "DRINKEN",
-    COCKTAIL = "COCKTAIL",
-    OVERIGE = "OVERIGE"
-}
+import { RecipeInput, IngredientInput, Category } from "@/types/recipe"
 
 // CREATE
 

@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { getAllRecipesForIndex, Recipe } from "@/lib/queries";
+import { getAllRecipesForIndex } from "@/lib/queries";
+import { Recipe } from "@/types/recipe"
 
 export default function Index() {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
