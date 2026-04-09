@@ -16,7 +16,9 @@ export default function Index() {
 
                 // Sort recipes (newest first)
                 data.sort((a: Recipe, b: Recipe) => {
-                    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+                    const aTime = a.createdAt ? new Date(a.createdAt).getTime() : 0;
+                    const bTime = b.createdAt ? new Date(b.createdAt).getTime() : 0;
+                    return bTime - aTime;
                 });
 
                 setRecipes(data);
@@ -30,7 +32,8 @@ export default function Index() {
         fetchRecipes();
     }, []);
 
-    const formatDate = (isoString: string) => {
+    const formatDate = (isoString?: string) => {
+        if (!isoString) return "Unknown date";
         const date = new Date(isoString);
         return date.toLocaleDateString('nl-NL', { day: "numeric", month: "long", year: "numeric" });
     };
@@ -63,8 +66,8 @@ export default function Index() {
                             >
                                 {recipe.title}{" "}
                                 <span className="text-gray-600 dark:text-gray-400 text-xs">
-                                ({formatDate(recipe.createdAt)})
-                            </span>
+                                  ({formatDate(recipe.createdAt)})
+                                </span>
                             </Link>
                         </li>
                     ))}
