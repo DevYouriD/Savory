@@ -53,18 +53,18 @@ export default function CreateRecipeForm() {
         e.preventDefault();
 
         const input: RecipeInput = {
-            title: form.title,
-            description: form.description,
-            instructions: form.instructions,
+            title: [form.title],
+            description: [form.description],
+            instructions: [form.instructions],
             imageUrl: form.imageUrl?.trim() || "https://placehold.co/600x400?text=No+Image",
             preparationTime: Number(form.preparationTime),
             cookingTime: Number(form.cookingTime),
             servings: Number(form.servings),
             category: form.category,
-            ingredients: form.ingredients.map((ing) => ({
-                name: ing.name,
-                unit: ing.unit,
-                quantity: Number(ing.quantity),
+            ingredients: form.ingredients.map((ingredient) => ({
+                name: [ingredient.name],
+                unit: ingredient.unit,
+                quantity: Number(ingredient.quantity),
             })),
         };
 
@@ -185,21 +185,21 @@ export default function CreateRecipeForm() {
                     <span className="w-6"></span>
                 </div>
 
-                {form.ingredients.map((ing, i) => (
+                {form.ingredients.map((ingredient, i) => (
                     <div key={i} className="flex flex-wrap gap-2 mb-2 items-center">
                         <input
-                            value={ing.name}
+                            value={ingredient.name}
                             onChange={(e) => handleIngredientChange(i, "name", e.target.value)}
                             className="border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg flex-1 min-w-[100px] focus:ring-2 focus:ring-blue-400 focus:outline-none"
                         />
                         <input
-                            value={ing.unit}
+                            value={ingredient.unit}
                             onChange={(e) => handleIngredientChange(i, "unit", e.target.value)}
                             className="border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg w-24 text-center focus:ring-2 focus:ring-blue-400 focus:outline-none"
                         />
                         <input
                             type="number"
-                            value={ing.quantity}
+                            value={ingredient.quantity}
                             onChange={(e) => handleIngredientChange(i, "quantity", e.target.value)}
                             className="border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg w-24 text-center focus:ring-2 focus:ring-blue-400 focus:outline-none"
                         />

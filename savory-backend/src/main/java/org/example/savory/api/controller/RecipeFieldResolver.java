@@ -6,7 +6,7 @@ import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
 /**
- * This field resolver makes sure only the first entry in multi-language fields like gets returned
+ * This field resolver makes sure only the first entry in multi-language fields is returned.
  */
 @Controller
 public class RecipeFieldResolver {
