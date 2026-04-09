@@ -25,7 +25,7 @@ RUN npm ci --omit=dev
 # Copy built files from builder
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/next.config.js ./
+COPY --from=builder /app/next.config.ts ./
 COPY --from=builder /app/package.json ./
 
 # Expose port Next.js listens on
