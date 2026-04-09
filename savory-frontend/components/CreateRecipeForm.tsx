@@ -17,6 +17,7 @@ export default function CreateRecipeForm() {
         cookingTime: 0,
         servings: 1,
         category: "OVERIGE",
+        author: "Unknown",
         ingredients: [{ name: "", unit: "", quantity: 0 }],
     };
 
@@ -61,6 +62,7 @@ export default function CreateRecipeForm() {
             cookingTime: Number(form.cookingTime),
             servings: Number(form.servings),
             category: form.category,
+            author: form.author,
             ingredients: form.ingredients.map((ingredient) => ({
                 name: [ingredient.name],
                 unit: ingredient.unit,
@@ -81,7 +83,7 @@ export default function CreateRecipeForm() {
             onSubmit={handleSubmit}
             className="space-y-12 mx-auto p-6 pt-6 sm:pt-8 bg-white dark:bg-gray-800 rounded-xl shadow-md"
         >
-            {/* Title */}
+            {/* TITLE */}
             <div className="space-y-2">
                 <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">Title</label>
                 <input
@@ -92,7 +94,7 @@ export default function CreateRecipeForm() {
                 />
             </div>
 
-            {/* Description */}
+            {/* DESCRIPTION */}
             <div className="space-y-2">
                 <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">Description</label>
                 <textarea
@@ -132,7 +134,18 @@ export default function CreateRecipeForm() {
                 </select>
             </div>
 
-            {/* Instructions */}
+            {/* AUTHOR */}
+            <div className="space-y-2">
+                <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">Author</label>
+                <input
+                    name="author"
+                    value={form.author}
+                    onChange={handleChange}
+                    className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                />
+            </div>
+
+            {/* INSTRUCTIONS */}
             <div className="space-y-2">
                 <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">Instructions</label>
                 <textarea
@@ -143,7 +156,7 @@ export default function CreateRecipeForm() {
                 />
             </div>
 
-            {/* Image URL */}
+            {/* IMAGE URL */}
             <div className="space-y-2">
                 <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">Image URL</label>
                 <input
@@ -154,7 +167,7 @@ export default function CreateRecipeForm() {
                 />
             </div>
 
-            {/* Prep / Cook / Servings */}
+            {/* PREP-TIME / COOKING-TIME / SERVINGS */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {["Prep Time (min)", "Cook Time (min)", "Servings"].map((label, idx) => {
                     const name = ["preparationTime", "cookingTime", "servings"][idx];
@@ -173,7 +186,7 @@ export default function CreateRecipeForm() {
                 })}
             </div>
 
-            {/* Ingredients */}
+            {/* INGREDIENTS */}
             <div>
                 <h2 className="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-100">Ingredients</h2>
 

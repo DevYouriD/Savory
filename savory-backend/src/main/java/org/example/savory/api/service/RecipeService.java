@@ -36,6 +36,7 @@ public class RecipeService {
                         .cookingTime(recipe.getCookingTime())
                         .servings(recipe.getServings())
                         .category(recipe.getCategory())
+                        .author(recipe.getAuthor())
                         .createdAt(LocalDateTime.now().toString())
                         .ingredients(recipe.getIngredients())
                         .build()
@@ -67,6 +68,7 @@ public class RecipeService {
                 .cookingTime(recipe.getCookingTime())
                 .servings(recipe.getServings())
                 .category(recipe.getCategory())
+                .author(recipe.getAuthor())
                 .updatedAt(LocalDateTime.now().toString())
                 .ingredients(recipe.getIngredients())
                 .build();

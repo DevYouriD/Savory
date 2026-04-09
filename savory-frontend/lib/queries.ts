@@ -21,6 +21,7 @@ export type RecipeInput = {
     cookingTime: number;
     servings: number;
     category: Category;
+    author: string;
     ingredients: IngredientInput[];
 };
 
@@ -73,6 +74,7 @@ export async function getAllRecipes() {
       cookingTime
       servings
       category
+      author
       createdAt
       }
     }
@@ -116,6 +118,7 @@ export async function getRecipeById(id: string) {
         cookingTime
         servings
         category
+        author
         createdAt
         updatedAt
         ingredients {
@@ -149,6 +152,7 @@ export async function updateRecipe(id: string, input: any) {
           cookingTime
           servings
           category
+          author
           ingredients {
             name
             unit

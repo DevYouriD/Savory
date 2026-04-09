@@ -17,6 +17,7 @@ public class RecipeDto {
     private int cookingTime;
     private int servings;
     private Category category;
+    private String author;
     private String createdAt;
     private String updatedAt;
     private List<Ingredient> ingredients;

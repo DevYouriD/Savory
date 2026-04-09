@@ -43,7 +43,9 @@ public class Recipe {
   Category category;
 
   // List<Tag> tags;
-  // User author;
+
+  private String author;
+
   // List<Comment> comments;
   // double rating;
   // List<Note> notes;

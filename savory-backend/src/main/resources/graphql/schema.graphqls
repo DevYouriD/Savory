@@ -12,6 +12,7 @@ type Recipe {
   cookingTime: Int
   servings: Int
   category: Category!
+  author: String
   createdAt: String
   updatedAt: String
   ingredients: [Ingredient!]
@@ -60,6 +61,7 @@ input RecipeInput {
   cookingTime: Int
   servings: Int
   category: Category!
+  author: String
   ingredients: [IngredientInput!]
 }
 
