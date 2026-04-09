@@ -58,19 +58,23 @@ export default function Index() {
 
                 {/* Recipe list */}
                 <ul className="mt-6 list-disc pl-5 space-y-1 text-sm max-w-2xl lg:mx-0">
-                    {recipes.map((recipe) => (
-                        <li key={recipe.id}>
-                            <Link
-                                href={`/recipe-details/${recipe.id}`}
-                                className="hover:underline text-gray-800 dark:text-gray-100"
-                            >
-                                {recipe.title}{" "}
-                                <span className="text-gray-600 dark:text-gray-400 text-xs">
-                                  ({formatDate(recipe.createdAt)})
-                                </span>
-                            </Link>
-                        </li>
-                    ))}
+                    {recipes.map((recipe) => {
+                        const title = recipe.title ?? "Untitled Recipe";
+                        const createdAt = recipe.createdAt ?? "";
+                        return (
+                            <li key={recipe.id}>
+                                <Link
+                                    href={`/recipe-details/${recipe.id}`}
+                                    className="hover:underline text-gray-800 dark:text-gray-100"
+                                >
+                                    {title}{" "}
+                                    <span className="text-gray-600 dark:text-gray-400 text-xs">
+                                        ({createdAt ? formatDate(createdAt) : "Unknown date"})
+                                    </span>
+                                </Link>
+                            </li>
+                        );
+                    })}
                 </ul>
 
             </div>
