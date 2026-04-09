@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { getAllRecipes } from "@/lib/queries";
 import Link from "next/link";
 
