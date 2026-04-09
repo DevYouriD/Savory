@@ -28,8 +28,8 @@ export default async function Home() {
                                 {/* Image */}
                                 <div className="group relative w-full overflow-hidden">
                                     <img
-                                        src={recipe.imageUrl}
-                                        alt={recipe.title}
+                                        src={recipe.imageUrl ?? "https://placehold.co/600x400?text=No+Image"}
+                                        alt={recipe.title ?? "Untitled Recipe"}
                                         className="w-full h-60 object-cover transition-transform duration-300 group-hover:scale-110"
                                     />
                                 </div>
@@ -37,31 +37,32 @@ export default async function Home() {
                                 {/* Content */}
                                 <div className="bg-card p-5 w-full">
                                     <h3 className="text-lg font-semibold text-card-foreground">
-                                        {recipe.title}
+                                        {recipe.title ?? "Untitled Recipe"}
                                     </h3>
 
                                     <p className="mt-2 text-sm text-muted-foreground">
-                                        {recipe.description}
+                                        {recipe.description ?? "No description"}
                                     </p>
 
                                     <div className="mt-3 text-sm text-muted-foreground flex flex-col gap-y-1">
                                         {/* Prep time + servings on the same line */}
                                         <div className="flex items-center gap-x-4 flex-wrap">
-                                            <span>🕑 {recipe.preparationTime + recipe.cookingTime} min</span>
-                                            <span>🍽️ {recipe.servings} porties</span>
+                                            <span>🕑 {(recipe.preparationTime ?? 0) + (recipe.cookingTime ?? 0)} min</span>
+                                            <span>🍽️ {recipe.servings ?? 0} porties</span>
                                         </div>
 
                                         {/* Custom formatted date */}
                                         <div>
-                                            <span>📆 {new Date(recipe.createdAt).toLocaleDateString('nl-NL', {
+                                            <span>📆 {recipe.createdAt ? new Date(recipe.createdAt).toLocaleDateString('nl-NL', {
                                                 day: 'numeric',
                                                 month: 'long',
                                                 year: 'numeric',
-                                            })}</span>
+                                            }) : "Unknown date"}</span>
+                                        </div>
 
-                                            {/* Tags Section */}
-                                            {/* TODO: Implement recipe Tags */}
-                                            {/* {recipe.tags?.slice(0, 2).map((tag, i) => (
+                                        {/* Tags Section */}
+                                        {/* TODO: Implement recipe Tags */}
+                                        {/* {recipe.tags?.slice(0, 2).map((tag, i) => (
                                             <span
                                               key={i}
                                               className="rounded-full bg-secondary px-3 py-1 text-secondary-foreground"
@@ -69,7 +70,6 @@ export default async function Home() {
                                               {tag.name}
                                             </span>
                                           ))} */}
-                                        </div>
                                     </div>
                                 </div>
                             </article>
