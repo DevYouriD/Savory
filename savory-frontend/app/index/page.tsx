@@ -35,7 +35,9 @@ export default function Index() {
     const formatDate = (isoString?: string) => {
         if (!isoString) return "Unknown date";
         const date = new Date(isoString);
-        return date.toLocaleDateString('nl-NL', { day: "numeric", month: "long", year: "numeric" });
+        return isNaN(date.getTime())
+            ? "Unknown date"
+            : date.toLocaleDateString('nl-NL', { day: "numeric", month: "long", year: "numeric" });
     };
 
     if (loading) {
@@ -69,7 +71,7 @@ export default function Index() {
                                 >
                                     {title}{" "}
                                     <span className="text-gray-600 dark:text-gray-400 text-xs">
-                                        ({createdAt ? formatDate(createdAt) : "Unknown date"})
+                                        {createdAt ? formatDate(createdAt) : "Unknown date"}
                                     </span>
                                 </Link>
                             </li>
