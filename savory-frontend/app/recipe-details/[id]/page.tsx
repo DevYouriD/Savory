@@ -1,10 +1,15 @@
 import { getRecipeById } from "@/lib/queries";
 import Link from "next/link";
 import { AppBreadcrumb } from "@/components/app-breadcrumb";
+import { Recipe } from "@/types/recipe";
 
-export default async function RecipeDetailsPage({ params }) {
+interface PageProps {
+    params: Promise<{ id: string }>;
+}
+
+export default async function RecipeDetailsPage({ params }: PageProps) {
     const { id } = await params;
-    const recipe = await getRecipeById(id);
+    const recipe: Recipe = await getRecipeById(id);
 
     return (
         <div className="py-6 sm:py-8 flex-1 flex flex-col">
@@ -38,8 +43,8 @@ export default async function RecipeDetailsPage({ params }) {
 
                 {/* Meta info */}
                 <div className="flex gap-6 text-sm text-muted-foreground mb-8">
-                    <span>⏱ {recipe.preparationTime + recipe.cookingTime} min</span>
-                    <span>🍽 {recipe.servings} servings</span>
+                    <span>⏱ {(recipe.preparationTime ?? 0) + (recipe.cookingTime ?? 0)} min</span>
+                    <span>🍽 {recipe.servings ?? 0} servings</span>
                 </div>
 
                 {/* INGREDIENTS */}

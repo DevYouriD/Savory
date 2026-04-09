@@ -2,12 +2,13 @@
 
 import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { createRecipe, RecipeInput, Recipe } from "@/lib/queries";
+import { createRecipe } from "@/lib/queries";
+import { Recipe, RecipeInput, Ingredient, Category } from "@/types/recipe";
 
 export default function CreateRecipeForm() {
     const router = useRouter();
 
-    const emptyRecipe: Recipe = {
+    const emptyRecipe: Omit<Recipe, "createdAt" | "updatedAt"> = {
         id: "",
         title: "",
         description: "",
@@ -16,7 +17,7 @@ export default function CreateRecipeForm() {
         preparationTime: 0,
         cookingTime: 0,
         servings: 1,
-        category: "OVERIGE",
+        category: Category.OVERIGE,
         author: "Unknown",
         ingredients: [{ name: "", unit: "", quantity: 0 }],
     };
@@ -30,23 +31,35 @@ export default function CreateRecipeForm() {
         setForm((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleIngredientChange = (index: number, field: string, value: string | number) => {
-        const updated = [...form.ingredients];
-        updated[index][field] = field === "quantity" ? Number(value) : value;
+    const handleIngredientChange = (index: number, field: keyof Ingredient, value: string | number) => {
+        const updated = [...form.ingredients!];
+
+        switch (field) {
+            case "name":
+                updated[index].name = value as string;
+                break;
+            case "unit":
+                updated[index].unit = value as string;
+                break;
+            case "quantity":
+                updated[index].quantity = Number(value);
+                break;
+        }
+
         setForm((prev) => ({ ...prev, ingredients: updated }));
     };
 
     const addIngredient = () => {
         setForm((prev) => ({
             ...prev,
-            ingredients: [...prev.ingredients, { name: "", unit: "", quantity: 0 }],
+            ingredients: [...(prev.ingredients || []), { name: "", unit: "", quantity: 0 }],
         }));
     };
 
     const removeIngredient = (index: number) => {
         setForm((prev) => ({
             ...prev,
-            ingredients: prev.ingredients.filter((_, i) => i !== index),
+            ingredients: (prev.ingredients || []).filter((_, i) => i !== index),
         }));
     };
 
@@ -54,17 +67,17 @@ export default function CreateRecipeForm() {
         e.preventDefault();
 
         const input: RecipeInput = {
-            title: [form.title],
-            description: [form.description],
-            instructions: [form.instructions],
+            title: [form.title ?? ""],
+            description: [form.description ?? ""],
+            instructions: [form.instructions ?? ""],
             imageUrl: form.imageUrl?.trim() || "https://placehold.co/600x400?text=No+Image",
             preparationTime: Number(form.preparationTime),
             cookingTime: Number(form.cookingTime),
             servings: Number(form.servings),
-            category: form.category,
-            author: form.author,
-            ingredients: form.ingredients.map((ingredient) => ({
-                name: [ingredient.name],
+            category: form.category ?? Category.OVERIGE,
+            author: form.author ?? "",
+            ingredients: (form.ingredients || []).map((ingredient) => ({
+                name: [ingredient.name ?? ""],
                 unit: ingredient.unit,
                 quantity: Number(ingredient.quantity),
             })),
@@ -170,14 +183,18 @@ export default function CreateRecipeForm() {
             {/* PREP-TIME / COOKING-TIME / SERVINGS */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 {["Prep Time (min)", "Cook Time (min)", "Servings"].map((label, idx) => {
-                    const name = ["preparationTime", "cookingTime", "servings"][idx];
+                    const keys = ["preparationTime", "cookingTime", "servings"] as const;
+                    const name: keyof typeof form = keys[idx];
+
                     return (
                         <div key={name} className="space-y-2">
-                            <label className="block font-semibold text-gray-700 dark:text-gray-200 text-center w-full">{label}</label>
+                            <label className="block font-semibold text-gray-700 dark:text-gray-200 text-center w-full">
+                                {label}
+                            </label>
                             <input
                                 type="number"
                                 name={name}
-                                value={form[name]}
+                                value={form[name] ?? 0}
                                 onChange={handleChange}
                                 className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
                             />
@@ -198,7 +215,7 @@ export default function CreateRecipeForm() {
                     <span className="w-6"></span>
                 </div>
 
-                {form.ingredients.map((ingredient, i) => (
+                {(form.ingredients || []).map((ingredient, i) => (
                     <div key={i} className="flex flex-wrap gap-2 mb-2 items-center">
                         <input
                             value={ingredient.name}

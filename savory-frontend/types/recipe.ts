@@ -12,9 +12,9 @@ export type Recipe = {
     servings?: number;
     category?: Category;
     author?: string;
-    ingredients?: Ingredient[];
     createdAt: string;
     updatedAt?: string;
+    ingredients?: Ingredient[];
 };
 
 export type Ingredient = {
@@ -38,9 +38,9 @@ export enum Category {
 }
 
 export type RecipeInput = {
-    title: string;
-    description: string;
-    instructions: string;
+    title: string[];
+    description: string[];
+    instructions: string[];
     imageUrl: string;
     preparationTime: number;
     cookingTime: number;
@@ -51,7 +51,7 @@ export type RecipeInput = {
 };
 
 export type IngredientInput = {
-    name: string;
+    name: string[];
     unit: string;
     quantity: number;
 };

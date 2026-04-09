@@ -22,6 +22,9 @@ yarn dev
 pnpm dev
 # or
 bun dev
+
+# To test production builds
+npm run build
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

@@ -2,7 +2,8 @@
 
 import { useState, FormEvent, ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
-import { updateRecipe, deleteRecipe, RecipeInput } from "@/lib/queries";
+import { updateRecipe, deleteRecipe } from "@/lib/queries";
+import { RecipeInput, Category } from "@/types/recipe";
 import { useEffect, useRef } from "react";
 
 export type Recipe = {
@@ -15,6 +16,7 @@ export type Recipe = {
     cookingTime: number;
     servings: number;
     author: string;
+    category: Category;
     ingredients: Ingredient[];
 };
 
@@ -38,9 +40,21 @@ export default function EditRecipeForm({ recipe }: Props) {
         setForm((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleIngredientChange = (index: number, field: string, value: string | number) => {
+    const handleIngredientChange = (index: number, field: keyof Ingredient, value: string | number) => {
         const updated = [...form.ingredients];
-        updated[index][field] = field === "quantity" ? Number(value) : value;
+
+        switch (field) {
+            case "name":
+                updated[index].name = value as string;
+                break;
+            case "unit":
+                updated[index].unit = value as string;
+                break;
+            case "quantity":
+                updated[index].quantity = Number(value);
+                break;
+        }
+
         setForm((prev) => ({ ...prev, ingredients: updated }));
     };
 
@@ -185,7 +199,7 @@ export default function EditRecipeForm({ recipe }: Props) {
                     <select
                         name="category"
                         value={form.category}
-                        onChange={(e) => setForm((prev) => ({ ...prev, category: e.target.value }))}
+                        onChange={(e) => setForm((prev) => ({ ...prev, category: e.target.value as Category }))}
                         className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
                     >
                         {[
@@ -250,14 +264,18 @@ export default function EditRecipeForm({ recipe }: Props) {
                 {/* PREP-TIME / COOKING-TIME / SERVINGS */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                     {["Prep Time (min)", "Cook Time (min)", "Servings"].map((label, idx) => {
-                        const name = ["preparationTime", "cookingTime", "servings"][idx];
+                        const keys = ["preparationTime", "cookingTime", "servings"] as const;
+                        const name: keyof typeof form = keys[idx];
+
                         return (
                             <div key={name} className="space-y-2">
-                                <label className="block font-semibold text-gray-700 dark:text-gray-200 text-center w-full">{label}</label>
+                                <label className="block font-semibold text-gray-700 dark:text-gray-200 text-center w-full">
+                                    {label}
+                                </label>
                                 <input
                                     type="number"
                                     name={name}
-                                    value={form[name]}
+                                    value={form[name] ?? 0}
                                     onChange={handleChange}
                                     className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
                                 />
