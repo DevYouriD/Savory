@@ -28,27 +28,32 @@ export async function createRecipe(input: RecipeInput) {
 export async function getAllRecipes() {
     const query = `
     query {
-    findAllRecipes {
-      id
-      title
-      description
-      instructions
-      imageUrl
-      preparationTime
-      cookingTime
-      servings
-      category
-      author
-      createdAt
-      }
+        findAllRecipes {
+            id
+            title
+            description
+            instructions
+            imageUrl
+            preparationTime
+            cookingTime
+            servings
+            category
+            author
+            createdAt
+        }
     }
     `;
 
-    const data = await graphqlRequest<{
-        findAllRecipes: any[];
-    }>(query);
+    try {
+        const data = await graphqlRequest<{
+            findAllRecipes: any[];
+        }>(query);
 
-    return data.findAllRecipes;
+        return data?.findAllRecipes ?? [];
+    } catch (error) {
+        console.error("getAllRecipes failed:", error);
+        return [];
+    }
 }
 
 export async function getAllRecipesForIndex() {

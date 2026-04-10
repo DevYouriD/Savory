@@ -108,6 +108,6 @@ jobs:
           username: ubuntu
           key: ${{ secrets.ORACLE_SSH_KEY }}
           script: |
-            cd ~/savory-frontend
+            cd ~/savory
             docker compose pull savory-frontend
             docker compose up -d savory-frontend

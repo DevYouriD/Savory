@@ -8,7 +8,7 @@ export async function graphqlRequest<T>(
             "Content-Type": "application/json",
         },
         body: JSON.stringify({ query, variables }),
-        cache: "no-store", // disable caching for now
+        next: { revalidate: 60 },
     });
 
     const json = await res.json();
