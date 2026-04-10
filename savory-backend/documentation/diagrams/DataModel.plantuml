@@ -8,6 +8,8 @@ entity "Recipe" as Recipe {
   +int preparationTime
   +int cookingTime
   +int servings
+  +Category category
+  +String author
   +String createdAt
   +String updatedAt
   +List<Ingredient> ingredients
