@@ -26,6 +26,7 @@ mutation createRecipe {
         cookingTime: 30,
         servings: 8,
         category: HOOFDGERECHT
+        author: "Unknown"
         ingredients: [
             { name: "Flour", unit: "grams", quantity: 200 },
             { name: "Sugar", unit: "grams", quantity: 150 },
@@ -41,6 +42,7 @@ mutation createRecipe {
         cookingTime
         servings
         category
+        author
         ingredients {
             name
             unit
@@ -63,6 +65,7 @@ query findAllRecipes {
         cookingTime
         servings
         category
+        author
         createdAt
         updatedAt
         ingredients {
@@ -87,6 +90,7 @@ query findRecipeById {
         cookingTime
         servings
         category
+        author
         createdAt
         updatedAt
         ingredients {
@@ -112,6 +116,7 @@ mutation updateRecipe {
             cookingTime: 35,
             servings: 10,
             category: HOOFDGERECHT
+            author: "Unknown"
             ingredients: [
                 { name: "Flour", unit: "grams", quantity: 220 },
                 { name: "Sugar", unit: "grams", quantity: 160 },
@@ -128,6 +133,7 @@ mutation updateRecipe {
         cookingTime
         servings
         category
+        author
         ingredients {
             name
             unit
