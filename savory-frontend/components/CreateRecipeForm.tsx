@@ -44,7 +44,7 @@ export default function CreateRecipeForm() {
                 updated[index].unit = value as string;
                 break;
             case "quantity":
-                updated[index].quantity = Math.max(0, Number(value));
+                updated[index].quantity = value === "" ? "" : Math.max(0, Number(value));
                 break;
         }
 
@@ -81,7 +81,7 @@ export default function CreateRecipeForm() {
             ingredients: (form.ingredients || []).map((ingredient) => ({
                 name: [ingredient.name ?? ""],
                 unit: ingredient.unit,
-                quantity: Number(ingredient.quantity),
+                quantity: ingredient.quantity === "" ? 0 : Number(ingredient.quantity),
             })),
         };
 
