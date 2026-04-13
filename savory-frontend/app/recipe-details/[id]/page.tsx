@@ -53,7 +53,8 @@ export default async function RecipeDetailsPage({ params }: PageProps) {
                     <ul className="list-disc list-inside space-y-1">
                         {recipe.ingredients?.map((ing, i) => (
                             <li key={i}>
-                                {ing.quantity} {ing.unit} {ing.name}
+                                {ing.quantity > 0 ? `${ing.quantity} ${ing.unit} ` : ""}
+                                {ing.name}
                             </li>
                         ))}
                     </ul>

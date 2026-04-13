@@ -51,7 +51,7 @@ export default function EditRecipeForm({ recipe }: Props) {
                 updated[index].unit = value as string;
                 break;
             case "quantity":
-                updated[index].quantity = Number(value);
+                updated[index].quantity = Math.max(0, Number(value));
                 break;
         }
 
@@ -161,6 +161,8 @@ export default function EditRecipeForm({ recipe }: Props) {
     };
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [showIngredientDeleteModal, setShowIngredientDeleteModal] = useState(false);
+    const [ingredientToDelete, setIngredientToDelete] = useState<number | null>(null);
 
     return (
         <>
@@ -289,43 +291,65 @@ export default function EditRecipeForm({ recipe }: Props) {
                     <h2 className="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-100">Ingredients</h2>
 
                     {/* Header labels */}
-                    <div className="flex flex-wrap gap-2 mb-2 font-semibold items-center text-gray-700 dark:text-gray-200">
-                        <span className="flex-1 min-w-[100px] text-center">Name</span>
-                        <span className="w-24 text-center">Unit</span>
-                        <span className="w-24 text-center">Quantity</span>
-                        <span className="w-6"></span> {/* delete button */}
+                    <div className="hidden sm:grid grid-cols-[2fr_1fr_1fr_auto] gap-2 mb-2 font-semibold text-gray-700 dark:text-gray-200">
+                        <span className="text-center">Name</span>
+                        <span className="text-center">Unit</span>
+                        <span className="text-center">Quantity</span>
+                        <span className="w-8"></span>
                     </div>
 
                     {/* Ingredient inputs */}
                     {form.ingredients.map((ingredient, i) => (
-                        <div key={i} className="flex flex-wrap gap-2 mb-2 items-center">
+                        <div
+                            key={i}
+                            className="grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr_auto] gap-2 mb-3 items-center"
+                        >
+                            {/* Name - Changed text-left to sm:text-center */}
                             <input
+                                placeholder="Name"
                                 value={ingredient.name}
                                 onChange={(e) => handleIngredientChange(i, "name", e.target.value)}
-                                className="border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg flex-1 min-w-[100px] focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                                className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none sm:text-center text-left"
                             />
+
+                            {/* Unit */}
                             <input
+                                placeholder="Unit"
                                 value={ingredient.unit}
                                 onChange={(e) => handleIngredientChange(i, "unit", e.target.value)}
-                                className="border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg w-24 text-center focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                                className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none sm:text-center text-left"
                             />
+
+                            {/* Quantity */}
                             <input
                                 type="number"
+                                min={0}
+                                placeholder="Qty"
                                 value={ingredient.quantity}
                                 onChange={(e) => handleIngredientChange(i, "quantity", e.target.value)}
-                                className="border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg w-24 text-center focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                                className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none sm:text-center text-left"
                             />
+
+                            {/* Delete button */}
                             <button
                                 type="button"
-                                onClick={() => removeIngredient(i)}
-                                className="text-red-500 font-bold text-lg cursor-pointer flex-shrink-0"
+                                onClick={() => {setIngredientToDelete(i); setShowIngredientDeleteModal(true);}}
+                                className="
+                                    text-red-500 font-bold text-lg rounded hover:bg-red-100 dark:hover:bg-red-900/30
+                                    cursor-pointer w-8 h-8 flex items-center justify-center
+                                    mx-auto sm:mx-0
+                                    sm:justify-self-center
+                                "
                             >
                                 ✕
                             </button>
                         </div>
                     ))}
 
-                    <button type="button" onClick={addIngredient} className="text-blue-500 text-sm mt-2">+ Add Ingredient</button>
+                    <button type="button" onClick={addIngredient}
+                            className="text-blue-500 cursor-pointer text-sm mt-2">
+                        + Add Ingredient
+                    </button>
                 </div>
 
                 <button type="submit" className="bg-green-800 cursor-pointer text-white px-6 py-3 rounded hover:opacity-90 mt-4 w-full">Save Changes</button>
@@ -357,6 +381,49 @@ export default function EditRecipeForm({ recipe }: Props) {
                             >
                                 Delete
                             </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Confirm delete ingredient popup */}
+            {showIngredientDeleteModal && ingredientToDelete !== null && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg max-w-sm w-full">
+
+                        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+                            Remove Ingredient
+                        </h3>
+
+                        <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
+                            Are you sure you want to remove this ingredient?
+                        </p>
+
+                        <div className="mt-4 flex justify-end gap-3">
+
+                            <button
+                                onClick={() => {
+                                    setShowIngredientDeleteModal(false);
+                                    setIngredientToDelete(null);
+                                }}
+                                className="px-4 py-2 rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:opacity-80"
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                onClick={() => {
+                                    if (ingredientToDelete !== null) {
+                                        removeIngredient(ingredientToDelete);
+                                    }
+                                    setShowIngredientDeleteModal(false);
+                                    setIngredientToDelete(null);
+                                }}
+                                className="px-4 py-2 rounded bg-red-600 text-white hover:opacity-90"
+                            >
+                                Delete
+                            </button>
+
                         </div>
                     </div>
                 </div>

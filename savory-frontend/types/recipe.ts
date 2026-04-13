@@ -20,7 +20,7 @@ export type Recipe = {
 export type Ingredient = {
     name: string;
     unit: string;
-    quantity: number;
+    quantity: number | "";
 };
 
 export enum Category {

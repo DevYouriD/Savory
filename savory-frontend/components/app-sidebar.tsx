@@ -98,50 +98,59 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           />
         </SidebarHeader>
 
-        <SidebarContent className="gap-0">
-          {categories.map((cat) => {
-            const displayName = cat === "OVERIGE" ? "Overige" : cat.charAt(0) + cat.slice(1).toLowerCase();
-            const items = filterItems(recipesByCategory[cat] || []);
+        <SidebarContent className="flex flex-col h-full">
 
-            return (
-                <Collapsible
-                    key={cat}
-                    title={displayName}
-                    open={openCategories[cat]}
-                    onOpenChange={(isOpen) =>
-                        setOpenCategories((prev) => ({ ...prev, [cat]: isOpen }))
-                    }
-                    className="group/collapsible"
-                >
-                  <SidebarGroup>
-                    <SidebarGroupLabel
-                        asChild
-                        className="group/label text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-                    >
-                      <CollapsibleTrigger>
-                        {displayName}{" "}
-                        <CaretRightIcon className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                      </CollapsibleTrigger>
-                    </SidebarGroupLabel>
-                    <CollapsibleContent>
-                      <SidebarGroupContent>
-                        <SidebarMenu>
-                          {items.map((item) => (
-                              <SidebarMenuItem key={item.id}>
-                                <SidebarMenuButton asChild>
-                                  <Link href={`/recipe-details/${item.id}`}>{item.title}</Link>
-                                </SidebarMenuButton>
-                              </SidebarMenuItem>
-                          ))}
-                        </SidebarMenu>
-                      </SidebarGroupContent>
-                    </CollapsibleContent>
-                  </SidebarGroup>
-                </Collapsible>
-            );
-          })}
+          {/* CATEGORIES */}
+          <div className="flex-1 overflow-auto">
+            {categories.map((cat) => {
+              const displayName =
+                  cat === "OVERIGE" ? "Overige" : cat.charAt(0) + cat.slice(1).toLowerCase();
 
-          <div className="mt-auto px-4 py-4 flex flex-col gap-4">
+              const items = filterItems(recipesByCategory[cat] || []);
+
+              return (
+                  <Collapsible
+                      key={cat}
+                      open={openCategories[cat]}
+                      onOpenChange={(isOpen) =>
+                          setOpenCategories((prev) => ({ ...prev, [cat]: isOpen }))
+                      }
+                      className="group/collapsible"
+                  >
+                    <SidebarGroup>
+                      <SidebarGroupLabel
+                          asChild
+                          className="group/label text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+                      >
+                        <CollapsibleTrigger>
+                          {displayName}
+                          <CaretRightIcon className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
+                        </CollapsibleTrigger>
+                      </SidebarGroupLabel>
+
+                      <CollapsibleContent>
+                        <SidebarGroupContent>
+                          <SidebarMenu>
+                            {items.map((item) => (
+                                <SidebarMenuItem key={item.id}>
+                                  <SidebarMenuButton asChild>
+                                    <Link href={`/recipe-details/${item.id}`}>
+                                      {item.title}
+                                    </Link>
+                                  </SidebarMenuButton>
+                                </SidebarMenuItem>
+                            ))}
+                          </SidebarMenu>
+                        </SidebarGroupContent>
+                      </CollapsibleContent>
+                    </SidebarGroup>
+                  </Collapsible>
+              );
+            })}
+          </div>
+
+          {/* FOOTER */}
+          <div className="shrink-0 px-4 py-4 flex flex-col gap-4 bg-sidebar border-t border-sidebar-border">
             <Link
                 href="/create-recipe"
                 className="bg-green-800 text-white text-center px-4 py-2 rounded hover:bg-green-700 transition"
