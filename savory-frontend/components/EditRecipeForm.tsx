@@ -51,7 +51,7 @@ export default function EditRecipeForm({ recipe }: Props) {
                 updated[index].unit = value as string;
                 break;
             case "quantity":
-                updated[index].quantity = Number(value);
+                updated[index].quantity = Math.max(0, Number(value));
                 break;
         }
 
@@ -323,6 +323,7 @@ export default function EditRecipeForm({ recipe }: Props) {
                             {/* Quantity */}
                             <input
                                 type="number"
+                                min={0}
                                 placeholder="Qty"
                                 value={ingredient.quantity}
                                 onChange={(e) => handleIngredientChange(i, "quantity", e.target.value)}
