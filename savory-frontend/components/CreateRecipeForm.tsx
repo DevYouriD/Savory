@@ -215,23 +215,24 @@ export default function CreateRecipeForm() {
 
                     {/* Header labels */}
                     <div
-                        className="hidden sm:grid grid-cols-[2fr_1fr_1fr_auto] gap-2 mb-2 font-semibold text-gray-700 dark:text-gray-200">
+                        className="hidden sm:grid grid-cols-[2fr_1fr_1fr_auto] gap-2 mb-2 font-semibold text-gray-700 dark:text-gray-200"
+                    >
                         <span className="text-center">Name</span>
                         <span className="text-center">Unit</span>
                         <span className="text-center">Quantity</span>
-                        <span></span>
+                        <span className="w-8"></span>
                     </div>
 
                     {(form.ingredients || []).map((ingredient, i) => (
                         <div
                             key={i}
-                            className="grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr_auto] gap-2 mb-3 items-center"
+                            className="grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr_auto] gap-2 mb-3 items-center justify-items-stretch"
                         >
                             {/* Name */}
                             <input
                                 value={ingredient.name}
                                 onChange={(e) => handleIngredientChange(i, "name", e.target.value)}
-                                className="border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg text-left"
+                                className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg text-left"
                                 placeholder="Name"
                             />
 
@@ -239,7 +240,7 @@ export default function CreateRecipeForm() {
                             <input
                                 value={ingredient.unit}
                                 onChange={(e) => handleIngredientChange(i, "unit", e.target.value)}
-                                className="border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg sm:text-center text-left"
+                                className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg sm:text-center text-left"
                                 placeholder="Unit"
                             />
 
@@ -248,7 +249,7 @@ export default function CreateRecipeForm() {
                                 type="number"
                                 value={ingredient.quantity}
                                 onChange={(e) => handleIngredientChange(i, "quantity", e.target.value)}
-                                className="border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg sm:text-center text-left"
+                                className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg sm:text-center text-left"
                                 placeholder="Qty"
                             />
 
@@ -260,9 +261,8 @@ export default function CreateRecipeForm() {
                                     setShowIngredientDeleteModal(true);
                                 }}
                                 className="
-                                    text-red-500 font-bold text-lg rounded
-                                    hover:bg-red-100 dark:hover:bg-red-900/30
-                                    w-8 h-8 flex items-center justify-center
+                                    text-red-500 font-bold text-lg rounded hover:bg-red-100 dark:hover:bg-red-900/30
+                                    cursor-pointer w-8 h-8 flex items-center justify-center
                                     mx-auto sm:mx-0
                                     sm:justify-self-center
                                 "
@@ -272,8 +272,9 @@ export default function CreateRecipeForm() {
                         </div>
                     ))}
 
-                    <button type="button" onClick={addIngredient} className="text-blue-500 text-sm mt-2">+ Add
-                        Ingredient
+                    <button type="button" onClick={addIngredient}
+                            className="text-blue-500 cursor-pointer text-sm mt-2">
+                        + Add Ingredient
                     </button>
                 </div>
 
