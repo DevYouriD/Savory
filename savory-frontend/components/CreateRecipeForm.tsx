@@ -44,7 +44,7 @@ export default function CreateRecipeForm() {
                 updated[index].unit = value as string;
                 break;
             case "quantity":
-                updated[index].quantity = Number(value);
+                updated[index].quantity = Math.max(0, Number(value));
                 break;
         }
 
@@ -247,6 +247,7 @@ export default function CreateRecipeForm() {
                             {/* Quantity */}
                             <input
                                 type="number"
+                                min={0}
                                 value={ingredient.quantity}
                                 onChange={(e) => handleIngredientChange(i, "quantity", e.target.value)}
                                 className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg sm:text-center text-left"
