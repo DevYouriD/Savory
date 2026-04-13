@@ -117,6 +117,11 @@ export default function CreateRecipeForm() {
                         name="description"
                         value={form.description}
                         onChange={handleChange}
+                        onInput={(e) => {
+                            const target = e.target as HTMLTextAreaElement;
+                            target.style.height = "auto";
+                            target.style.height = target.scrollHeight + "px";
+                        }}
                         className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none"
                     />
                 </div>
@@ -168,6 +173,11 @@ export default function CreateRecipeForm() {
                         name="instructions"
                         value={form.instructions}
                         onChange={handleChange}
+                        onInput={(e) => {
+                            const target = e.target as HTMLTextAreaElement;
+                            target.style.height = "auto";
+                            target.style.height = target.scrollHeight + "px";
+                        }}
                         className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none resize-none"
                     />
                 </div>
