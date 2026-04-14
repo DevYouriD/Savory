@@ -61,7 +61,7 @@ export default function CreateRecipeForm() {
     const removeIngredient = (index: number) => {
         setForm((prev) => ({
             ...prev,
-            ingredients: prev.ingredients.filter((_, i) => i !== index),
+            ingredients: (prev.ingredients ?? []).filter((_, i) => i !== index),
         }));
     };
 
