@@ -9,8 +9,6 @@ import {ThemeProvider} from "next-themes";
 import React, {useEffect, useState} from "react";
 import { AppBreadcrumb } from "@/components/app-breadcrumb";
 
-const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -27,8 +25,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     useEffect(() => setMounted(true), []);
 
     return (
-        <html lang="en" className={cn("font-mono", jetbrainsMono.variable)}>
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex`}>
+        <html lang="en" className={geistSans.variable}>
+        <body className="antialiased min-h-screen flex font-sans">
         {mounted && (
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
                 <SidebarProvider>
