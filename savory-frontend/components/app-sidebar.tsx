@@ -6,6 +6,7 @@ import { SearchForm } from "@/components/search-form";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import {
   Sidebar,
+  useSidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
@@ -38,6 +39,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const [recipesByCategory, setRecipesByCategory] = React.useState<Record<string, any[]>>({});
   const [searchQuery, setSearchQuery] = React.useState("");
   const [openCategories, setOpenCategories] = React.useState<Record<string, boolean>>({});
+  const { isMobile, setOpenMobile } = useSidebar();
 
   React.useEffect(() => {
     async function fetchRecipes() {
@@ -133,8 +135,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                           <SidebarMenu>
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.id}>
-                                  <SidebarMenuButton asChild>
-                                    <Link href={`/recipe-details/${item.id}`}>
+                                  <SidebarMenuButton asChild className="items-start h-auto whitespace-normal">
+                                    <Link
+                                        href={`/recipe-details/${item.id}`}
+                                        onClick={() => {
+                                          if (isMobile) {
+                                            setTimeout(() => setOpenMobile(false), 80);
+                                          }
+                                        }}
+                                        className="block w-full whitespace-normal break-words">
                                       {item.title}
                                     </Link>
                                   </SidebarMenuButton>

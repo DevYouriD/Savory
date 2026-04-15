@@ -15,13 +15,13 @@ export default async function Home() {
                     <h2 className="font-serif text-4xl font-semibold tracking-tight text-pretty sm:text-5xl text-foreground">
                         Good Food, Good Mood
                     </h2>
-                    <p className="mt-1 text-lg/8 text-muted-foreground">
+                    <p className="mt-1 text-lg text-muted-foreground">
                         The ultimate recipe catalogue
                     </p>
                 </div>
 
                 {/* Blog grid */}
-                <div className="mx-auto mt-6 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-12 border-t border-border pt-6 sm:mt-10 sm:pt-10 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+                <div className="mx-auto mt-4 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-12 border-t border-border pt-4 sm:mt-6 sm:pt-6 lg:mx-0 lg:max-w-none lg:grid-cols-3">
 
                     {recipes.map((recipe) => (
                         <Link key={recipe.id} href={`/recipe-details/${recipe.id}`}>
