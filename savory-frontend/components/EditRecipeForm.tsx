@@ -323,6 +323,7 @@ export default function EditRecipeForm({ recipe }: Props) {
                             {/* Quantity */}
                             <input
                                 type="number"
+                                step="any"
                                 min={0}
                                 placeholder="Qty"
                                 value={ingredient.quantity}

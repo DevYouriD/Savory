@@ -45,11 +45,11 @@ export async function getAllRecipes() {
     `;
 
     try {
-        const data = await graphqlRequest<{
-            findAllRecipes: any[];
-        }>(query);
+        const data = await graphqlRequest<{ findAllRecipes: any[] }>(query);
 
-        return data?.findAllRecipes ?? [];
+        return (data?.findAllRecipes ?? []).sort((a, b) =>
+            a.title.localeCompare(b.title)
+        );
     } catch (error) {
         console.error("getAllRecipes failed:", error);
         return [];

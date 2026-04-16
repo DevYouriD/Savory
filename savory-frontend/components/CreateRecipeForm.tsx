@@ -257,6 +257,7 @@ export default function CreateRecipeForm() {
                             {/* Quantity */}
                             <input
                                 type="number"
+                                step="any"
                                 min={0}
                                 value={ingredient.quantity}
                                 onChange={(e) => handleIngredientChange(i, "quantity", e.target.value)}
