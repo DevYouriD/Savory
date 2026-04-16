@@ -2,6 +2,7 @@ import { getRecipeById } from "@/lib/queries";
 import Link from "next/link";
 import { AppBreadcrumb } from "@/components/app-breadcrumb";
 import { Recipe } from "@/types/recipe";
+import { CopyIngredientsButton } from "@/components/CopyIngredientsButton";
 
 interface PageProps {
     params: Promise<{ id: string }>;
@@ -58,6 +59,8 @@ export default async function RecipeDetailsPage({ params }: PageProps) {
                             </li>
                         ))}
                     </ul>
+
+                    {recipe.ingredients?.length ? (<CopyIngredientsButton recipe={recipe} />) : null}
                 </div>
 
                 {/* INSTRUCTIONS */}
