@@ -3,7 +3,8 @@ import Link from "next/link";
 import { AppBreadcrumb } from "@/components/app-breadcrumb";
 import { Recipe } from "@/types/recipe";
 import { CopyIngredientsButton } from "@/components/CopyIngredientsButton";
-import { getTranslator } from "@/lib/i18n";
+import { getLanguage } from "@/lib/layout-translation/get-language";
+import { getTranslator } from "@/lib/layout-translation/i18n";
 
 interface PageProps {
     params: Promise<{ id: string }>;
@@ -12,7 +13,8 @@ interface PageProps {
 export default async function RecipeDetailsPage({ params }: PageProps) {
     const { id } = await params;
     const recipe: Recipe = await getRecipeById(id);
-    const t = getTranslator("nl");
+    const language = await getLanguage()
+    const t = getTranslator(language);
 
     return (
         <div className="py-6 sm:py-8 flex-1 flex flex-col">

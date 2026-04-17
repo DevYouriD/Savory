@@ -3,13 +3,13 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { getAllRecipesForIndex } from "@/lib/queries";
-import { Recipe } from "@/types/recipe"
-import { getTranslator } from "@/lib/i18n";
+import { Recipe } from "@/types/recipe";
+import { useTranslation } from "@/lib/layout-translation/use-translation";
 
 export default function Index() {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
     const [loading, setLoading] = useState(true);
-    const t = getTranslator("nl");
+    const { t } = useTranslation();
 
     useEffect(() => {
         const fetchRecipes = async () => {

@@ -4,11 +4,11 @@ import { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { createRecipe } from "@/lib/queries";
 import { Recipe, RecipeInput, Ingredient, Category } from "@/types/recipe";
-import { getTranslator } from "@/lib/i18n";
+import { useTranslation } from "@/lib/layout-translation/use-translation";
 
 export default function CreateRecipeForm() {
     const router = useRouter();
-    const t = getTranslator("nl");
+    const { t } = useTranslation();
 
     const fields = [
         {

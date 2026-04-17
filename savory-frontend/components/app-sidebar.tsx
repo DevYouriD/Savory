@@ -18,9 +18,9 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { CaretRightIcon } from "@phosphor-icons/react";
-import { ModeToggle } from "@/components/ui/mode-toggle";
+import { SettingsMenu } from "@/components/SettingsMenu";
 import { getAllRecipes } from "@/lib/queries";
-import { getTranslator } from "@/lib/i18n";
+import { useTranslation } from "@/lib/layout-translation/use-translation";
 
 const categories = [
   "APERITIEF",
@@ -41,7 +41,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [openCategories, setOpenCategories] = React.useState<Record<string, boolean>>({});
   const { isMobile, setOpenMobile } = useSidebar();
-  const t = getTranslator("nl");
+  const { t } = useTranslation();
 
   React.useEffect(() => {
     async function fetchRecipes() {
@@ -169,7 +169,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               {t("sidebar.newRecipeButton")}
             </Link>
 
-            <ModeToggle />
+            <SettingsMenu />
           </div>
         </SidebarContent>
         <SidebarRail />

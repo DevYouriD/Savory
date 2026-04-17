@@ -2,11 +2,13 @@ export const dynamic = "force-dynamic";
 
 import { getAllRecipes } from "@/lib/queries";
 import Link from "next/link";
-import { getTranslator } from "@/lib/i18n";
+import { getLanguage } from "@/lib/layout-translation/get-language";
+import { getTranslator } from "@/lib/layout-translation/i18n";
 
 export default async function Home() {
     const recipes = await getAllRecipes();
-    const t = getTranslator("nl");
+    const language = await getLanguage()
+    const t = getTranslator(language);
 
     return (
         <div className="py-6 sm:py-8 flex-1 flex flex-col">

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { updateRecipe, deleteRecipe } from "@/lib/queries";
 import { RecipeInput, Category } from "@/types/recipe";
 import { useEffect, useRef } from "react";
-import { getTranslator } from "@/lib/i18n";
+import { useTranslation } from "@/lib/layout-translation/use-translation";
 
 export type Recipe = {
     id: string;
@@ -33,7 +33,7 @@ interface Props {
 
 export default function EditRecipeForm({ recipe }: Props) {
     const router = useRouter();
-    const t = getTranslator("nl");
+    const { t } = useTranslation();
 
     const fields = [
         {
