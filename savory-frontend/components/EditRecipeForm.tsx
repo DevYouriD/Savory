@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { updateRecipe, deleteRecipe } from "@/lib/queries";
 import { RecipeInput, Category } from "@/types/recipe";
 import { useEffect, useRef } from "react";
+import { getTranslator } from "@/lib/i18n";
 
 export type Recipe = {
     id: string;
@@ -32,6 +33,22 @@ interface Props {
 
 export default function EditRecipeForm({ recipe }: Props) {
     const router = useRouter();
+    const t = getTranslator("nl");
+
+    const fields = [
+        {
+            key: "preparationTime",
+            labelKey: "editRecipeForm.prepTime",
+        },
+        {
+            key: "cookingTime",
+            labelKey: "editRecipeForm.cookTime",
+        },
+        {
+            key: "servings",
+            labelKey: "editRecipeForm.servings",
+        },
+    ] as const;
 
     const [form, setForm] = useState({ ...recipe });
 
@@ -169,7 +186,7 @@ export default function EditRecipeForm({ recipe }: Props) {
             <form onSubmit={handleSubmit} className="space-y-12 mx-auto p-6 pt-6 sm:pt-8 bg-white dark:bg-gray-800 rounded-xl shadow-md">
                 {/* TITLE */}
                 <div className="space-y-2">
-                    <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">Title</label>
+                    <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">{t("editRecipeForm.title")}</label>
                     <input
                         name="title"
                         value={form.title}
@@ -180,7 +197,7 @@ export default function EditRecipeForm({ recipe }: Props) {
 
                 {/* DESCRIPTION */}
                 <div className="space-y-2">
-                    <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">Description</label>
+                    <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">{t("createRecipeForm.description")}</label>
                     <textarea
                         name="description"
                         ref={descriptionRef}
@@ -197,7 +214,7 @@ export default function EditRecipeForm({ recipe }: Props) {
 
                 {/* CATEGORY */}
                 <div className="space-y-2">
-                    <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">Category</label>
+                    <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">{t("createRecipeForm.category")}</label>
                     <select
                         name="category"
                         value={form.category}
@@ -226,7 +243,7 @@ export default function EditRecipeForm({ recipe }: Props) {
 
                 {/* AUTHOR */}
                 <div className="space-y-2">
-                    <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">Author</label>
+                    <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">{t("createRecipeForm.author")}</label>
                     <input
                         name="author"
                         value={form.author}
@@ -237,7 +254,7 @@ export default function EditRecipeForm({ recipe }: Props) {
 
                 {/* INSTRUCTIONS */}
                 <div className="space-y-2">
-                    <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">Instructions</label>
+                    <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">{t("createRecipeForm.instructions")}</label>
                     <textarea
                         name="instructions"
                         ref={instructionsRef}
@@ -254,7 +271,7 @@ export default function EditRecipeForm({ recipe }: Props) {
 
                 {/* IMAGE URL */}
                 <div className="space-y-2">
-                    <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">Image URL</label>
+                    <label className="block text-lg font-semibold text-gray-700 dark:text-gray-200">{t("createRecipeForm.imageUrl")}</label>
                     <input
                         name="imageUrl"
                         value={form.imageUrl}
@@ -265,36 +282,32 @@ export default function EditRecipeForm({ recipe }: Props) {
 
                 {/* PREP-TIME / COOKING-TIME / SERVINGS */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    {["Prep Time (min)", "Cook Time (min)", "Servings"].map((label, idx) => {
-                        const keys = ["preparationTime", "cookingTime", "servings"] as const;
-                        const name: keyof typeof form = keys[idx];
+                    {fields.map(({ key, labelKey }) => (
+                        <div key={key} className="space-y-2">
+                            <label className="block font-semibold text-gray-700 dark:text-gray-200 text-center w-full">
+                                {t(labelKey)}
+                            </label>
 
-                        return (
-                            <div key={name} className="space-y-2">
-                                <label className="block font-semibold text-gray-700 dark:text-gray-200 text-center w-full">
-                                    {label}
-                                </label>
-                                <input
-                                    type="number"
-                                    name={name}
-                                    value={form[name] ?? 0}
-                                    onChange={handleChange}
-                                    className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                                />
-                            </div>
-                        );
-                    })}
+                            <input
+                                type="number"
+                                name={key}
+                                value={form[key] ?? 0}
+                                onChange={handleChange}
+                                className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-3 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                            />
+                        </div>
+                    ))}
                 </div>
 
                 {/* INGREDIENTS */}
                 <div>
-                    <h2 className="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-100">Ingredients</h2>
+                    <h2 className="text-lg font-semibold mb-3 text-gray-800 dark:text-gray-100">{t("createRecipeForm.ingredients")}</h2>
 
                     {/* Header labels */}
                     <div className="hidden sm:grid grid-cols-[2fr_1fr_1fr_auto] gap-2 mb-2 font-semibold text-gray-700 dark:text-gray-200">
-                        <span className="text-center">Name</span>
-                        <span className="text-center">Unit</span>
-                        <span className="text-center">Quantity</span>
+                        <span className="text-center">{t("createRecipeForm.ingredientName")}</span>
+                        <span className="text-center">{t("createRecipeForm.ingredientUnit")}</span>
+                        <span className="text-center">{t("createRecipeForm.ingredientQuantity")}</span>
                         <span className="w-8"></span>
                     </div>
 
@@ -306,7 +319,6 @@ export default function EditRecipeForm({ recipe }: Props) {
                         >
                             {/* Name - Changed text-left to sm:text-center */}
                             <input
-                                placeholder="Name"
                                 value={ingredient.name}
                                 onChange={(e) => handleIngredientChange(i, "name", e.target.value)}
                                 className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none sm:text-center text-left"
@@ -314,7 +326,6 @@ export default function EditRecipeForm({ recipe }: Props) {
 
                             {/* Unit */}
                             <input
-                                placeholder="Unit"
                                 value={ingredient.unit}
                                 onChange={(e) => handleIngredientChange(i, "unit", e.target.value)}
                                 className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none sm:text-center text-left"
@@ -325,7 +336,6 @@ export default function EditRecipeForm({ recipe }: Props) {
                                 type="number"
                                 step="any"
                                 min={0}
-                                placeholder="Qty"
                                 value={ingredient.quantity}
                                 onChange={(e) => handleIngredientChange(i, "quantity", e.target.value)}
                                 className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none sm:text-center text-left"
@@ -349,43 +359,14 @@ export default function EditRecipeForm({ recipe }: Props) {
 
                     <button type="button" onClick={addIngredient}
                             className="text-blue-500 cursor-pointer text-sm mt-2">
-                        + Add Ingredient
+                        {t("editRecipeForm.addIngredientButton")}
                     </button>
                 </div>
 
-                <button type="submit" className="bg-green-800 cursor-pointer text-white px-6 py-3 rounded hover:opacity-90 mt-4 w-full">Save Changes</button>
+                <button type="submit" className="bg-green-800 cursor-pointer text-white px-6 py-3 rounded hover:opacity-90 mt-4 w-full">{t("editRecipeForm.saveChangesButton")}</button>
 
-                <button type="button" onClick={() => setShowDeleteModal(true)} className="bg-red-600 cursor-pointer text-white px-6 py-3 rounded hover:opacity-90 mt-2 w-full">Delete Recipe</button>
+                <button type="button" onClick={() => setShowDeleteModal(true)} className="bg-red-600 cursor-pointer text-white px-6 py-3 rounded hover:opacity-90 mt-2 w-full">{t("editRecipeForm.deleteRecipeButton")}</button>
             </form>
-
-            {/* Confirm delete recipe popup */}
-            {showDeleteModal && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
-                    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg max-w-sm w-full">
-                        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
-                            Delete Recipe
-                        </h3>
-                        <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
-                            Are you sure you want to delete this recipe?
-                        </p>
-
-                        <div className="mt-4 flex justify-end gap-3">
-                            <button
-                                onClick={() => setShowDeleteModal(false)}
-                                className="px-4 py-2 rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:opacity-80"
-                            >
-                                Cancel
-                            </button>
-                            <button
-                                onClick={handleDelete}
-                                className="px-4 py-2 rounded bg-red-600 text-white hover:opacity-90"
-                            >
-                                Delete
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            )}
 
             {/* Confirm delete ingredient popup */}
             {showIngredientDeleteModal && ingredientToDelete !== null && (
@@ -393,11 +374,11 @@ export default function EditRecipeForm({ recipe }: Props) {
                     <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg max-w-sm w-full">
 
                         <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
-                            Remove Ingredient
+                            {t("editRecipeForm.deleteIngredientModalTitle")}
                         </h3>
 
                         <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
-                            Are you sure you want to remove this ingredient?
+                            {t("editRecipeForm.deleteIngredientModalSubtitle")}
                         </p>
 
                         <div className="mt-4 flex justify-end gap-3">
@@ -409,7 +390,7 @@ export default function EditRecipeForm({ recipe }: Props) {
                                 }}
                                 className="px-4 py-2 rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:opacity-80"
                             >
-                                Cancel
+                                {t("editRecipeForm.deleteIngredientModalCancel")}
                             </button>
 
                             <button
@@ -422,9 +403,38 @@ export default function EditRecipeForm({ recipe }: Props) {
                                 }}
                                 className="px-4 py-2 rounded bg-red-600 text-white hover:opacity-90"
                             >
-                                Delete
+                                {t("editRecipeForm.deleteIngredientModalConfirm")}
                             </button>
 
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Confirm delete recipe popup */}
+            {showDeleteModal && (
+                <div className="fixed inset-0 flex items-center justify-center bg-black/50 z-50">
+                    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg max-w-sm w-full">
+                        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+                            {t("editRecipeForm.deleteRecipeModalTitle")}
+                        </h3>
+                        <p className="mt-2 text-sm text-gray-600 dark:text-gray-300">
+                            {t("editRecipeForm.deleteRecipeModalSubtitle")}
+                        </p>
+
+                        <div className="mt-4 flex justify-end gap-3">
+                            <button
+                                onClick={() => setShowDeleteModal(false)}
+                                className="px-4 py-2 rounded bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:opacity-80"
+                            >
+                                {t("editRecipeForm.deleteRecipeModalCancel")}
+                            </button>
+                            <button
+                                onClick={handleDelete}
+                                className="px-4 py-2 rounded bg-red-600 text-white hover:opacity-90"
+                            >
+                                {t("editRecipeForm.deleteRecipeModalConfirm")}
+                            </button>
                         </div>
                     </div>
                 </div>

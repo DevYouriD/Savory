@@ -1,0 +1,65 @@
+{
+  "home": {
+    "title": "Good Food, Good Mood",
+    "subtitle": "De ultieme recepten catalogus"
+  },
+  "sidebar": {
+    "newRecipeButton": "+ Maak nieuw recept"
+  },
+  "recipeDetailed": {
+    "servings": "porties",
+    "ingredientsTitle": "Ingrediënten",
+    "instructionsTitle": "Instructies"
+  },
+  "createRecipeForm": {
+    "title": "Titel",
+    "description": "Beschrijving",
+    "category": "Categorie",
+    "author": "Auteur",
+    "instructions": "Instructies",
+    "imageUrl": "Afbeelding URL",
+    "prepTime": "Voorbereidingstijd (min)",
+    "cookTime": "Bereidingstijd (min)",
+    "servings": "Porties",
+    "ingredients": "Ingrediënten",
+    "ingredientName": "Naam",
+    "ingredientUnit": "Eenheid",
+    "ingredientQuantity": "Hoeveelheid",
+    "addIngredientButton": "+ Ingrediënt Toevoegen",
+    "createRecipeButton": "Recept Opslaan",
+    "deleteIngredientModalTitle": "Ingrediënt Verwijderen",
+    "deleteIngredientModalSubtitle": "Weet je zeker dat je dit ingrediënt wil verwijderen?",
+    "deleteIngredientModalCancel": "Annuleer",
+    "deleteIngredientModalConfirm": "Verwijder"
+  },
+  "editRecipeForm": {
+    "title": "Titel",
+    "description": "Beschrijving",
+    "category": "Categorie",
+    "author": "Auteur",
+    "instructions": "Instructies",
+    "imageUrl": "Afbeelding URL",
+    "prepTime": "Voorbereidingstijd (min)",
+    "cookTime": "Bereidingstijd (min)",
+    "servings": "Porties",
+    "ingredients": "Ingrediënten",
+    "ingredientName": "Naam",
+    "ingredientUnit": "Eenheid",
+    "ingredientQuantity": "Hoeveelheid",
+    "addIngredientButton": "+ Ingrediënt Toevoegen",
+    "saveChangesButton": "Wijzigingen Opslaan",
+    "deleteRecipeButton": "Recept Verwijderen",
+    "deleteIngredientModalTitle": "Ingrediënt Verwijderen",
+    "deleteIngredientModalSubtitle": "Weet je zeker dat je dit ingrediënt wil verwijderen?",
+    "deleteIngredientModalCancel": "Annuleer",
+    "deleteIngredientModalConfirm": "Verwijder",
+    "deleteRecipeModalTitle": "Recept Verwijderen",
+    "deleteRecipeModalSubtitle": "Weet je zeker dat je dit recept wil verwijderen?",
+    "deleteRecipeModalCancel": "Annuleer",
+    "deleteRecipeModalConfirm": "Verwijder"
+  },
+  "index": {
+    "title": "Recepten Index",
+    "subtitle": "Alle beschikbare recepten"
+  }
+}
