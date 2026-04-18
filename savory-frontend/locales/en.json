@@ -1,0 +1,68 @@
+{
+  "home": {
+    "title": "Good Food, Good Mood",
+    "subtitle": "The ultimate recipe catalogue"
+  },
+  "sidebar": {
+    "newRecipeButton": "+ Create New Recipe"
+  },
+  "recipeDetailed": {
+    "servings": "servings",
+    "ingredientsTitle": "Ingredients",
+    "instructionsTitle": "Instructions"
+  },
+  "createRecipeForm": {
+    "title": "Title",
+    "description": "Description",
+    "category": "Category",
+    "author": "Author",
+    "instructions": "Instructions",
+    "imageUrl": "Image URL",
+    "prepTime": "Prep Time (min)",
+    "cookTime": "Cook Time (min)",
+    "servings": "Servings",
+    "ingredients": "Ingredients",
+    "ingredientName": "Name",
+    "ingredientUnit": "Unit",
+    "ingredientQuantity": "Quantity",
+    "addIngredientButton": "+ Add Ingredient",
+    "createRecipeButton": "Create Recipe",
+    "deleteIngredientModalTitle": "Remove Ingredient",
+    "deleteIngredientModalSubtitle": "Are you sure you want to remove this ingredient?",
+    "deleteIngredientModalCancel": "Cancel",
+    "deleteIngredientModalConfirm": "Delete"
+  },
+  "editRecipeForm": {
+    "title": "Title",
+    "description": "Description",
+    "category": "Category",
+    "author": "Author",
+    "instructions": "Instructions",
+    "imageUrl": "Image URL",
+    "prepTime": "Prep Time (min)",
+    "cookTime": "Cook Time (min)",
+    "servings": "Servings",
+    "ingredients": "Ingredients",
+    "ingredientName": "Name",
+    "ingredientUnit": "Unit",
+    "ingredientQuantity": "Quantity",
+    "addIngredientButton": "+ Add Ingredient",
+    "saveChangesButton": "Save Changes",
+    "deleteRecipeButton": "Delete Recipe",
+    "deleteIngredientModalTitle": "Remove Ingredient",
+    "deleteIngredientModalSubtitle": "Are you sure you want to remove this ingredient?",
+    "deleteIngredientModalCancel": "Cancel",
+    "deleteIngredientModalConfirm": "Delete",
+    "deleteRecipeModalTitle": "Delete Recipe",
+    "deleteRecipeModalSubtitle": "Are you sure you want to delete this recipe?",
+    "deleteRecipeModalCancel": "Cancel",
+    "deleteRecipeModalConfirm": "Delete"
+  },
+  "index": {
+    "title": "Recipe Index",
+    "subtitle": "All available recipes"
+  },
+  "searchForm": {
+    "sidebarInput": "Search recipes..."
+  }
+}

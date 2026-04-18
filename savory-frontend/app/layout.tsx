@@ -32,7 +32,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 <SidebarProvider>
                     <AppSidebar />
                     <main className="flex-1 flex flex-col">
-                        <SidebarTrigger />
+                        <div className="sticky top-0 z-50 flex items-center p-1">
+                            <SidebarTrigger />
+                        </div>
                         {children}
                     </main>
                 </SidebarProvider>

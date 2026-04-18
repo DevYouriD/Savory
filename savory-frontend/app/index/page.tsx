@@ -3,11 +3,13 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { getAllRecipesForIndex } from "@/lib/queries";
-import { Recipe } from "@/types/recipe"
+import { Recipe } from "@/types/recipe";
+import { useTranslation } from "@/lib/layout-translation/use-translation";
 
 export default function Index() {
     const [recipes, setRecipes] = useState<Recipe[]>([]);
     const [loading, setLoading] = useState(true);
+    const { t } = useTranslation();
 
     useEffect(() => {
         const fetchRecipes = async () => {
@@ -46,10 +48,10 @@ export default function Index() {
                 {/* Title + Subtitle */}
                 <div className="mx-auto max-w-2xl text-center">
                     <h2 className="font-serif text-4xl font-semibold tracking-tight text-pretty sm:text-5xl">
-                        Recipe Index
+                        {t("index.title")}
                     </h2>
                     <p className="mt-1 text-lg/8 dark:text-gray-200">
-                        All available recipes
+                        {t("index.subtitle")}
                     </p>
                 </div>
 

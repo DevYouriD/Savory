@@ -2,9 +2,13 @@ export const dynamic = "force-dynamic";
 
 import { getAllRecipes } from "@/lib/queries";
 import Link from "next/link";
+import { getLanguage } from "@/lib/layout-translation/get-language";
+import { getTranslator } from "@/lib/layout-translation/i18n";
 
 export default async function Home() {
     const recipes = await getAllRecipes();
+    const language = await getLanguage()
+    const t = getTranslator(language);
 
     return (
         <div className="py-6 sm:py-8 flex-1 flex flex-col">
@@ -13,10 +17,10 @@ export default async function Home() {
                 {/* Title + Subtitle */}
                 <div className="mx-auto max-w-2xl lg:mx-0">
                     <h2 className="font-serif text-4xl font-semibold tracking-tight text-pretty sm:text-5xl text-foreground">
-                        Good Food, Good Mood
+                        {t("home.title")}
                     </h2>
                     <p className="mt-1 text-lg text-muted-foreground">
-                        The ultimate recipe catalogue
+                        {t("home.subtitle")}
                     </p>
                 </div>
 

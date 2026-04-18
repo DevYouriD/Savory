@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/sidebar"
 import { MagnifyingGlassIcon } from "@phosphor-icons/react"
 import React from "react"
+import { useTranslation } from "@/lib/layout-translation/use-translation";
 
 interface SearchFormProps {
   value: string
@@ -15,6 +16,7 @@ interface SearchFormProps {
 }
 
 export function SearchForm({ value, onChange }: SearchFormProps) {
+  const { t } = useTranslation();
   return (
       <form>
         <SidebarGroup className="py-0 mt-3">
@@ -24,7 +26,7 @@ export function SearchForm({ value, onChange }: SearchFormProps) {
             </Label>
             <SidebarInput
                 id="search"
-                placeholder="Search the docs..."
+                placeholder={t("searchForm.sidebarInput")}
                 className="pl-8"
                 value={value}
                 onChange={onChange}

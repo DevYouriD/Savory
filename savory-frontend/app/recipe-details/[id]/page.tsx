@@ -3,6 +3,8 @@ import Link from "next/link";
 import { AppBreadcrumb } from "@/components/app-breadcrumb";
 import { Recipe } from "@/types/recipe";
 import { CopyIngredientsButton } from "@/components/CopyIngredientsButton";
+import { getLanguage } from "@/lib/layout-translation/get-language";
+import { getTranslator } from "@/lib/layout-translation/i18n";
 
 interface PageProps {
     params: Promise<{ id: string }>;
@@ -11,6 +13,8 @@ interface PageProps {
 export default async function RecipeDetailsPage({ params }: PageProps) {
     const { id } = await params;
     const recipe: Recipe = await getRecipeById(id);
+    const language = await getLanguage()
+    const t = getTranslator(language);
 
     return (
         <div className="py-6 sm:py-8 flex-1 flex flex-col">
@@ -45,12 +49,12 @@ export default async function RecipeDetailsPage({ params }: PageProps) {
                 {/* Meta info */}
                 <div className="flex gap-6 text-sm text-muted-foreground mb-8">
                     <span>⏱ {(recipe.preparationTime ?? 0) + (recipe.cookingTime ?? 0)} min</span>
-                    <span>🍽 {recipe.servings ?? 0} servings</span>
+                    <span>🍽 {recipe.servings ?? 0} {t("recipeDetailed.servings")}</span>
                 </div>
 
                 {/* INGREDIENTS */}
                 <div className="mb-8">
-                    <h2 className="text-2xl font-semibold mb-3">Ingredients</h2>
+                    <h2 className="text-2xl font-semibold mb-3">{t("recipeDetailed.ingredientsTitle")}</h2>
                     <ul className="list-disc list-inside space-y-1">
                         {recipe.ingredients?.map((ing, i) => (
                             <li key={i}>
@@ -65,7 +69,7 @@ export default async function RecipeDetailsPage({ params }: PageProps) {
 
                 {/* INSTRUCTIONS */}
                 <div>
-                    <h2 className="text-2xl font-semibold mb-3">Instructions</h2>
+                    <h2 className="text-2xl font-semibold mb-3">{t("recipeDetailed.instructionsTitle")}</h2>
                     <ol className="list-decimal list-inside space-y-2">
                         {(Array.isArray(recipe.instructions)
                                 ? recipe.instructions
