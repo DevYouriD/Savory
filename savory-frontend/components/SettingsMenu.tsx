@@ -24,7 +24,7 @@ export function SettingsMenu() {
         <DropdownMenu>
             {/* GEAR BUTTON */}
             <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="icon">
+                <Button className="cursor-pointer" variant="outline" size="icon">
                     <Settings className="h-[1.2rem] w-[1.2rem]" />
                     <span className="sr-only">Settings</span>
                 </Button>

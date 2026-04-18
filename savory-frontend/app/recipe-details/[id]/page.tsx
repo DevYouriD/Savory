@@ -53,7 +53,7 @@ export default async function RecipeDetailsPage({ params }: PageProps) {
                 </div>
 
                 {/* INGREDIENTS */}
-                <div className="mb-8">
+                <div>
                     <h2 className="text-2xl font-semibold mb-3">{t("recipeDetailed.ingredientsTitle")}</h2>
                     <ul className="list-disc list-inside space-y-1">
                         {recipe.ingredients?.map((ing, i) => (

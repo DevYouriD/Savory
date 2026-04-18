@@ -9,7 +9,9 @@
   "recipeDetailed": {
     "servings": "porties",
     "ingredientsTitle": "Ingrediënten",
-    "instructionsTitle": "Instructies"
+    "instructionsTitle": "Instructies",
+    "copyIngredientsButton": "Kopieer Ingrediënten",
+    "ingriedientsCopiedToast": "Ingrediënten gekopieërd"
   },
   "createRecipeForm": {
     "title": "Titel",
