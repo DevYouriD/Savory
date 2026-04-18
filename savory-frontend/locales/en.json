@@ -9,7 +9,9 @@
   "recipeDetailed": {
     "servings": "servings",
     "ingredientsTitle": "Ingredients",
-    "instructionsTitle": "Instructions"
+    "instructionsTitle": "Instructions",
+    "copyIngredientsButton": "Copy Ingredients",
+    "ingriedientsCopiedToast": "Ingredients copied"
   },
   "createRecipeForm": {
     "title": "Title",
