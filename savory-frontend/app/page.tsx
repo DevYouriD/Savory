@@ -4,6 +4,7 @@ import { getAllRecipes } from "@/lib/queries";
 import Link from "next/link";
 import { getLanguage } from "@/lib/layout-translation/get-language";
 import { getTranslator } from "@/lib/layout-translation/i18n";
+import Image from "next/image";
 
 export default async function Home() {
     const recipes = await getAllRecipes();
@@ -15,13 +16,43 @@ export default async function Home() {
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
 
                 {/* Title + Subtitle */}
-                <div className="mx-auto max-w-2xl lg:mx-0">
+                <div className="mx-auto max-w-2xl text-center">
                     <h2 className="font-serif text-4xl font-semibold tracking-tight text-pretty sm:text-5xl text-foreground">
                         {t("home.title")}
                     </h2>
-                    <p className="mt-1 text-lg text-muted-foreground">
-                        {t("home.subtitle")}
-                    </p>
+                    {/*<p className="mt-1 text-lg text-muted-foreground">*/}
+                    {/*    {t("home.subtitle")}*/}
+                    {/*</p>*/}
+                </div>
+
+                {/* Meet the Chefs */}
+                <div className="mx-auto mt-10 mb-10 grid max-w-3xl grid-cols-1 sm:grid-cols-3 gap-4 items-stretch">
+
+                    {/* Chef Rudi */}
+                    <div className="aspect-[3/4] w-full overflow-hidden rounded-xl">
+                        <img
+                            src="/Chef_Rudi.png"
+                            alt="Chef Rudi Image"
+                            className="h-full w-full object-cover object-center"
+                        />
+                    </div>
+
+                    {/* Center text card */}
+                    <div className="flex items-center justify-center rounded-xl px-6 py-8 text-center shadow-sm">
+                        <h3 className="text-xl font-semibold text-card-foreground leading-snug">
+                            Rudi & Youri’s<br />
+                            Receptenboek
+                        </h3>
+                    </div>
+
+                    {/* Chef Youri */}
+                    <div className="aspect-[3/4] w-full overflow-hidden rounded-xl">
+                        <img
+                            src="/Chef_Youri.jpg"
+                            alt="Chef Youri Image"
+                            className="h-full w-full object-cover object-[50%_20%]"
+                        />
+                    </div>
                 </div>
 
                 {/* Blog grid */}

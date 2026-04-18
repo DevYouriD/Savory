@@ -36,7 +36,7 @@ export function CopyIngredientsButton({ recipe }: { recipe: Recipe }) {
     };
 
     return (
-        <div className="relative my-4">
+        <div className="relative my-6">
             <button
                 onClick={handleCopy}
                 className="bg-yellow-500 text-black font-medium text-center px-4 py-2 rounded hover:bg-yellow-400 transition cursor-pointer"
