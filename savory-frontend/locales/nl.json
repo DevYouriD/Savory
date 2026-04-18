@@ -61,5 +61,8 @@
   "index": {
     "title": "Recepten Index",
     "subtitle": "Alle beschikbare recepten"
+  },
+  "searchForm": {
+    "sidebarInput": "Zoek recepten..."
   }
 }

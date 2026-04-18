@@ -61,5 +61,8 @@
   "index": {
     "title": "Recipe Index",
     "subtitle": "All available recipes"
+  },
+  "searchForm": {
+    "sidebarInput": "Search recipes..."
   }
 }
