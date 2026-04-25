@@ -317,11 +317,11 @@ export default function EditRecipeForm({ recipe }: Props) {
                             key={i}
                             className="grid grid-cols-1 sm:grid-cols-[2fr_1fr_1fr_auto] gap-2 mb-3 items-center"
                         >
-                            {/* Name - Changed text-left to sm:text-center */}
+                            {/* Name */}
                             <input
                                 value={ingredient.name}
                                 onChange={(e) => handleIngredientChange(i, "name", e.target.value)}
-                                className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none sm:text-center text-left"
+                                className="w-full border border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 p-2 rounded-lg focus:ring-2 focus:ring-blue-400 focus:outline-none text-left"
                             />
 
                             {/* Unit */}

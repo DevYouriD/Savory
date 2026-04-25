@@ -28,7 +28,7 @@ export default function CreateRecipeForm() {
     const emptyRecipe: Omit<Recipe, "createdAt" | "updatedAt"> = {
         id: "",
         title: "",
-        description: "[Oosters]",
+        description: "",
         instructions: "",
         imageUrl: "",
         preparationTime: 0,
