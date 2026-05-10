@@ -21,6 +21,7 @@ import { CaretRightIcon } from "@phosphor-icons/react";
 import { SettingsMenu } from "@/components/SettingsMenu";
 import { getAllRecipes } from "@/lib/queries";
 import { useTranslation } from "@/lib/layout-translation/use-translation";
+import { HouseIcon } from "@phosphor-icons/react";
 
 const categories = [
   "APERITIEF",
@@ -96,9 +97,29 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
       <Sidebar {...props}>
         <SidebarHeader>
+          <SidebarMenu className="mt-2">
+            <SidebarMenuItem>
+              <SidebarMenuButton asChild className="justify-center text-base font-semibold">
+                <Link
+                    href="/"
+                    onClick={() => {
+                      if (isMobile) {
+                        setTimeout(() => setOpenMobile(false), 80);
+                      }
+                    }}
+                >
+                  <HouseIcon />
+                  <span>Home</span>
+                </Link>
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+
           <SearchForm
               value={searchQuery}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setSearchQuery(e.target.value)
+              }
           />
         </SidebarHeader>
 
