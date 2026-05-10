@@ -1,10 +1,5 @@
 
-# Savory Frontend
-
----
-
-## ToDo
-- Change theme-colors
+# Savory Application (Frontend)
 
 ---
 

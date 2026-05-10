@@ -19,7 +19,7 @@ export function SearchForm({ value, onChange }: SearchFormProps) {
   const { t } = useTranslation();
   return (
       <form>
-        <SidebarGroup className="py-0 mt-3">
+        <SidebarGroup className="py-0">
           <SidebarGroupContent className="relative">
             <Label htmlFor="search" className="sr-only">
               Search
