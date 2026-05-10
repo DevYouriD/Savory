@@ -1,5 +1,5 @@
 
-# Savory Frontend
+# Savory Application (Frontend)
 
 ---
 

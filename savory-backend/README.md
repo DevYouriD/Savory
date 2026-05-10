@@ -1,4 +1,4 @@
-# Savory Platform (Backend)
+# Savory Application (Backend)
 
 ---
 
