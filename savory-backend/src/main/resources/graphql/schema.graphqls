@@ -39,6 +39,15 @@ enum Category {
   OVERIGE
 }
 
+type RecipePage {
+    recipes: [Recipe!]!
+    page: Int!
+    size: Int!
+    totalElements: Int!
+    totalPages: Int!
+    hasNext: Boolean!
+}
+
 # =====================
 # Queries
 # =====================
@@ -46,6 +55,7 @@ enum Category {
 type Query {
   findRecipeById(id: ID!): Recipe
   findAllRecipes: [Recipe!]!
+  findRecipes(page: Int = 0, size: Int = 10): RecipePage!
 }
 
 # =====================

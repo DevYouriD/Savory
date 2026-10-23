@@ -4,13 +4,13 @@
 //val jacocoVersion = "0.8.12"
 
 // Dependency versions
-val lombokVersion = "1.18.42"
+val lombokVersion = "1.18.48"
 val mysqlConnectorJavaVersion = "8.0.33"
 val plantUmlVersion = "8059"
 
 plugins {
     java
-    id("org.springframework.boot") version "4.0.3"
+    id("org.springframework.boot") version "4.1.2"
     id("io.spring.dependency-management") version "1.1.7"
     //	id("pmd")
     //	id("checkstyle")
@@ -63,7 +63,7 @@ dependencies {
     // TESTING
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher:6.1.3")
 
 }
 
