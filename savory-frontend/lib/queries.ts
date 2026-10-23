@@ -146,6 +146,35 @@ export async function getRecipeCardsPage(
     return data.findRecipes;
 }
 
+export async function getSidebarRecipes() {
+    const query = `
+        query {
+            findAllRecipes {
+                id
+                title
+                category
+            }
+        }
+    `;
+
+    try {
+        const data = await graphqlRequest<{
+            findAllRecipes: {
+                id: string;
+                title: string;
+                category: string;
+            }[];
+        }>(query);
+
+        return (data?.findAllRecipes ?? []).sort((a, b) =>
+            (a.title ?? "").localeCompare(b.title ?? "")
+        );
+    } catch (error) {
+        console.error("getSidebarRecipes failed:", error);
+        return [];
+    }
+}
+
 // UPDATE
 
 export async function updateRecipe(id: string, input: any) {

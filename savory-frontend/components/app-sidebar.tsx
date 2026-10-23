@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/sidebar";
 import { CaretRightIcon } from "@phosphor-icons/react";
 import { SettingsMenu } from "@/components/SettingsMenu";
-import { getAllRecipes } from "@/lib/queries";
+import { getSidebarRecipes } from "@/lib/queries";
 import { useTranslation } from "@/lib/layout-translation/use-translation";
 import { HouseIcon } from "@phosphor-icons/react";
 
@@ -54,7 +54,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   React.useEffect(() => {
     async function fetchRecipes() {
-      const allRecipes = await getAllRecipes();
+      const allRecipes = await getSidebarRecipes();
 
       // Group recipes by category
       const grouped: Record<string, any[]> = {};
