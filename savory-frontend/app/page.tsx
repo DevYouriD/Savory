@@ -3,7 +3,7 @@ export const dynamic = "force-dynamic";
 import { getRecipeCardsPage } from "@/lib/queries";
 import { getLanguage } from "@/lib/layout-translation/get-language";
 import { getTranslator } from "@/lib/layout-translation/i18n";
-import RecipeGrid from "@/lib/RecipeGrid";
+import RecipeGrid from "@/components/RecipeGrid";
 
 const PAGE_SIZE = 9;
 
@@ -26,14 +26,22 @@ export default async function Home() {
                     {/*</p>*/}
                 </div>
 
+                {/* Paginated recipe grid */}
+                <RecipeGrid
+                    initialRecipes={recipePage.recipes}
+                    initialPage={recipePage.page}
+                    initialHasNext={recipePage.hasNext}
+                />
+
                 {/* Meet the Chefs */}
-                <div className="mx-auto mt-10 mb-10 grid max-w-3xl grid-cols-1 sm:grid-cols-3 gap-4 items-stretch">
+                <div className="mx-auto mt-16 mb-10 grid max-w-3xl grid-cols-1 sm:grid-cols-3 gap-4 items-stretch">
 
                     {/* Chef Rudi */}
                     <div className="aspect-[3/4] w-full overflow-hidden rounded-xl">
                         <img
                             src="/Chef_Rudi.png"
                             alt="Chef Rudi Image"
+                            loading="lazy"
                             className="h-full w-full object-cover object-center"
                         />
                     </div>
@@ -51,17 +59,12 @@ export default async function Home() {
                         <img
                             src="/Chef_Youri.jpg"
                             alt="Chef Youri Image"
+                            loading="lazy"
                             className="h-full w-full object-cover object-[50%_20%]"
                         />
                     </div>
                 </div>
 
-                {/* Paginated recipe grid */}
-                <RecipeGrid
-                    initialRecipes={recipePage.recipes}
-                    initialPage={recipePage.page}
-                    initialHasNext={recipePage.hasNext}
-                />
             </div>
         </div>
     );

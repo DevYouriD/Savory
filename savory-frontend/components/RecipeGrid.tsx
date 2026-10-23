@@ -69,6 +69,7 @@ export default function RecipeGrid({
                                         "https://placehold.co/600x400?text=No+Image"
                                     }
                                     alt={recipe.title ?? "Untitled Recipe"}
+                                    loading="lazy"
                                     className="w-full h-60 object-cover transition-transform duration-300 group-hover:scale-110"
                                 />
                             </div>
@@ -118,7 +119,7 @@ export default function RecipeGrid({
 
             {/* Load more */}
             {hasNext && (
-                <div className="mt-8 flex flex-col items-center gap-3">
+                <div className="my-14 flex flex-col items-center gap-3">
                     {error && (
                         <p className="text-sm text-destructive" role="alert">
                             {error}
@@ -129,8 +130,7 @@ export default function RecipeGrid({
                         type="button"
                         onClick={loadMoreRecipes}
                         disabled={loadingMore}
-                        className="rounded-md border border-border px-5 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-50"
-                    >
+                        className="rounded-md border border-border px-7 py-3 text-base font-semibold text-foreground transition-colors hover:bg-accent cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"                    >
                         {loadingMore
                             ? "Loading..."
                             : "Load more recipes"}

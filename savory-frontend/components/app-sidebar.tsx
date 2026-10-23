@@ -37,6 +37,14 @@ const categories = [
   "OVERIGE",
 ];
 
+function normalizeSearchText(text: string): string {
+  return text
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .trim();
+}
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const [recipesByCategory, setRecipesByCategory] = React.useState<Record<string, any[]>>({});
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -72,8 +80,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   // Filter items by search query
   const filterItems = (items: any[]) => {
-    if (!searchQuery) return items;
-    return items.filter((r) => r.title.toLowerCase().includes(searchQuery.toLowerCase()));
+    const normalizedQuery = normalizeSearchText(searchQuery);
+
+    if (!normalizedQuery) return items;
+
+    return items.filter((recipe) =>
+        normalizeSearchText(recipe.title ?? "").includes(normalizedQuery)
+    );
   };
 
   React.useEffect(() => {
