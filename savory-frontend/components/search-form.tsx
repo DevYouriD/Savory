@@ -27,7 +27,7 @@ export function SearchForm({ value, onChange }: SearchFormProps) {
             <SidebarInput
                 id="search"
                 placeholder={t("searchForm.sidebarInput")}
-                className="pl-8"
+                className="h-10 pl-8 text-base sm:text-[15px] text-foreground/80 placeholder:text-muted-foreground"
                 value={value}
                 onChange={onChange}
             />

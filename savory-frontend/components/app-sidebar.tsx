@@ -112,7 +112,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarHeader>
           <SidebarMenu className="mt-2">
             <SidebarMenuItem>
-              <SidebarMenuButton asChild className="justify-center text-base font-semibold">
+              <SidebarMenuButton asChild className="h-10 justify-center text-base font-semibold">
                 <Link
                     href="/"
                     onClick={() => {
@@ -158,7 +158,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     <SidebarGroup>
                       <SidebarGroupLabel
                           asChild
-                          className="group/label text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground cursor-pointer"
+                          className="group/label text-base font-semibold text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground cursor-pointer"
                       >
                         <CollapsibleTrigger>
                           {displayName}
@@ -171,7 +171,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                           <SidebarMenu>
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.id}>
-                                  <SidebarMenuButton asChild className="items-start h-auto whitespace-normal">
+                                  <SidebarMenuButton asChild className="h-auto min-h-10 items-start whitespace-normal text-sm leading-relaxed">
                                     <Link
                                         href={`/recipe-details/${item.id}`}
                                         onClick={() => {
