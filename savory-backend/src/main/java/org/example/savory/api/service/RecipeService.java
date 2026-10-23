@@ -5,10 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.savory.api.model.dto.RecipeDto;
+import org.example.savory.api.model.dto.RecipePageDto;
 import org.example.savory.api.model.entity.Recipe;
 import org.example.savory.api.repository.RecipeRepository;
 import org.example.savory.api.utility.GraphQLExceptionHandler;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -52,6 +57,38 @@ public class RecipeService {
     public Recipe findRecipeById(String id) {
         return recipeRepository.findById(id)
                 .orElseThrow(() -> new GraphQLExceptionHandler.RecipeNotFoundException(id));
+    }
+
+
+    public RecipePageDto findRecipes(int page, int size) {
+        if (page < 0) {
+            throw new IllegalArgumentException(
+                    "Page must be zero or greater"
+            );
+        }
+
+        if (size < 1 || size > 100) {
+            throw new IllegalArgumentException(
+                    "Page size must be between 1 and 100"
+            );
+        }
+
+        Pageable pageable = PageRequest.of(
+                page,
+                size,
+                Sort.by(Sort.Direction.DESC, "createdAt")
+        );
+
+        Page<Recipe> recipePage = recipeRepository.findAll(pageable);
+
+        return new RecipePageDto(
+                recipePage.getContent(),
+                recipePage.getNumber(),
+                recipePage.getSize(),
+                recipePage.getTotalElements(),
+                recipePage.getTotalPages(),
+                recipePage.hasNext()
+        );
     }
 
     // UPDATE

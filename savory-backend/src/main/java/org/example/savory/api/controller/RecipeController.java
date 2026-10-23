@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.savory.api.model.dto.RecipeDto;
+import org.example.savory.api.model.dto.RecipePageDto;
 import org.example.savory.api.model.entity.Recipe;
 import org.example.savory.api.service.RecipeService;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -37,6 +38,11 @@ public class RecipeController {
     @QueryMapping
     public List<Recipe> findAllRecipes() {
         return recipeService.findAllRecipes();
+    }
+
+    @QueryMapping
+    public RecipePageDto findRecipes(@Argument int page, @Argument int size) {
+        return recipeService.findRecipes(page, size);
     }
 
     // UPDATE

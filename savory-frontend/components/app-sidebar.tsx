@@ -37,6 +37,14 @@ const categories = [
   "OVERIGE",
 ];
 
+function normalizeSearchText(text: string): string {
+  return text
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .trim();
+}
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const [recipesByCategory, setRecipesByCategory] = React.useState<Record<string, any[]>>({});
   const [searchQuery, setSearchQuery] = React.useState("");
@@ -72,8 +80,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   // Filter items by search query
   const filterItems = (items: any[]) => {
-    if (!searchQuery) return items;
-    return items.filter((r) => r.title.toLowerCase().includes(searchQuery.toLowerCase()));
+    const normalizedQuery = normalizeSearchText(searchQuery);
+
+    if (!normalizedQuery) return items;
+
+    return items.filter((recipe) =>
+        normalizeSearchText(recipe.title ?? "").includes(normalizedQuery)
+    );
   };
 
   React.useEffect(() => {
@@ -99,7 +112,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarHeader>
           <SidebarMenu className="mt-2">
             <SidebarMenuItem>
-              <SidebarMenuButton asChild className="justify-center text-base font-semibold">
+              <SidebarMenuButton asChild className="h-10 justify-center text-base font-semibold">
                 <Link
                     href="/"
                     onClick={() => {
@@ -127,7 +140,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
           {/* CATEGORIES */}
           <div className="flex-1 overflow-auto">
-            {categories.map((cat) => {
+            {categories.filter((cat) => (recipesByCategory[cat] ?? []).length > 0).map((cat) => {
               const displayName =
                   cat === "OVERIGE" ? "Overige" : cat.charAt(0) + cat.slice(1).toLowerCase();
 
@@ -145,7 +158,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                     <SidebarGroup>
                       <SidebarGroupLabel
                           asChild
-                          className="group/label text-sm text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground cursor-pointer"
+                          className="group/label text-base font-semibold text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground cursor-pointer"
                       >
                         <CollapsibleTrigger>
                           {displayName}
@@ -158,7 +171,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                           <SidebarMenu>
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.id}>
-                                  <SidebarMenuButton asChild className="items-start h-auto whitespace-normal">
+                                  <SidebarMenuButton asChild className="h-auto min-h-10 items-start whitespace-normal text-sm leading-relaxed">
                                     <Link
                                         href={`/recipe-details/${item.id}`}
                                         onClick={() => {

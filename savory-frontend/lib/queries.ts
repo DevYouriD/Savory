@@ -1,7 +1,7 @@
 "use server";
 
 import { graphqlRequest } from "./graphql";
-import { RecipeInput, IngredientInput, Category } from "@/types/recipe"
+import {RecipeInput, IngredientInput, Category, Recipe} from "@/types/recipe"
 
 // CREATE
 
@@ -104,6 +104,46 @@ export async function getRecipeById(id: string) {
     }>(query, { id });
 
     return data.findRecipeById;
+}
+
+export async function getRecipeCardsPage(
+    page: number = 0,
+    size: number = 10
+) {
+    const query = `
+        query FindRecipes($page: Int!, $size: Int!) {
+            findRecipes(page: $page, size: $size) {
+                recipes {
+                    id
+                    title
+                    description
+                    imageUrl
+                    preparationTime
+                    cookingTime
+                    servings
+                    createdAt
+                }
+                page
+                size
+                totalElements
+                totalPages
+                hasNext
+            }
+        }
+    `;
+
+    const data = await graphqlRequest<{
+        findRecipes: {
+            recipes: Recipe[];
+            page: number;
+            size: number;
+            totalElements: number;
+            totalPages: number;
+            hasNext: boolean;
+        };
+    }>(query, { page, size });
+
+    return data.findRecipes;
 }
 
 // UPDATE
