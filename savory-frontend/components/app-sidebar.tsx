@@ -140,7 +140,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
           {/* CATEGORIES */}
           <div className="flex-1 overflow-auto">
-            {categories.map((cat) => {
+            {categories.filter((cat) => (recipesByCategory[cat] ?? []).length > 0).map((cat) => {
               const displayName =
                   cat === "OVERIGE" ? "Overige" : cat.charAt(0) + cat.slice(1).toLowerCase();
 

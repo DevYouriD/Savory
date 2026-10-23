@@ -54,13 +54,14 @@ export default function RecipeGrid({
     return (
         <>
             {/* Recipe grid */}
-            <div className="mx-auto mt-4 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-12 border-t border-border pt-4 sm:mt-6 sm:pt-6 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+            <div className="mx-auto mt-4 grid max-w-2xl grid-cols-1 items-stretch gap-x-8 gap-y-8 border-t border-border pt-4 sm:mt-6 sm:grid-cols-2 sm:gap-y-10 sm:pt-6 lg:mx-0 lg:max-w-none lg:grid-cols-3">
                 {recipes.map((recipe) => (
                     <Link
                         key={recipe.id}
                         href={`/recipe-details/${recipe.id}`}
+                        className="block h-full"
                     >
-                        <article className="flex max-w-xl flex-col border border-border rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300">
+                        <article className="flex h-full flex-col overflow-hidden rounded-xl border border-border shadow-md transition-all duration-300 hover:shadow-xl">
                             {/* Image */}
                             <div className="group relative w-full overflow-hidden">
                                 <img
@@ -75,40 +76,42 @@ export default function RecipeGrid({
                             </div>
 
                             {/* Content */}
-                            <div className="bg-card p-5 w-full">
-                                <h3 className="text-lg font-semibold text-card-foreground">
+                            <div className="flex min-h-0 flex-1 flex-col bg-card p-5">
+                                <h3 className="line-clamp-2 text-lg font-semibold text-card-foreground">
                                     {recipe.title ?? "Untitled Recipe"}
                                 </h3>
 
-                                <p className="mt-2 text-sm text-muted-foreground">
-                                    {recipe.description ?? "No description"}
+                                <p className="mt-2 line-clamp-3 text-sm text-muted-foreground">
+                                    {recipe.description?.trim() || "No description"}
                                 </p>
 
-                                <div className="mt-3 text-sm text-muted-foreground flex flex-col gap-y-1">
-                                    <div className="flex items-center gap-x-4 flex-wrap">
+                                <div className="mt-auto pt-3 text-sm text-muted-foreground">
+
+                                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
                                         <span>
                                             🕑 {(recipe.preparationTime ?? 0) +
                                             (recipe.cookingTime ?? 0)} min
                                         </span>
+
                                         <span>
                                             🍽️ {recipe.servings ?? 0} porties
                                         </span>
                                     </div>
 
-                                    <div>
+                                    <div className="mt-1">
                                         <span>
                                             📆 {recipe.createdAt
-                                            ? new Date(
-                                                recipe.createdAt
-                                            ).toLocaleDateString("nl-NL", {
-                                                day: "numeric",
-                                                month: "long",
-                                                year: "numeric",
-                                            })
+                                            ? new Date(recipe.createdAt).toLocaleDateString(
+                                                "nl-NL",
+                                                {
+                                                    day: "numeric",
+                                                    month: "long",
+                                                    year: "numeric",
+                                                }
+                                            )
                                             : "Unknown date"}
                                         </span>
                                     </div>
-
                                     {/* TODO: Implement recipe tags */}
                                 </div>
                             </div>
@@ -130,7 +133,7 @@ export default function RecipeGrid({
                         type="button"
                         onClick={loadMoreRecipes}
                         disabled={loadingMore}
-                        className="rounded-md border border-border px-7 py-3 text-base font-semibold text-foreground transition-colors hover:bg-accent cursor-pointer disabled:cursor-not-allowed disabled:opacity-50"                    >
+                        className="rounded-md border border-gray-600 px-7 py-3 text-base font-semibold text-foreground transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground dark:border-border cursor-pointer disabled:cursor-not-allowed disabled:opacity-50">
                         {loadingMore
                             ? "Loading..."
                             : "Load more recipes"}
